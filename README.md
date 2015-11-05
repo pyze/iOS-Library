@@ -1,6 +1,6 @@
 ![alt text](http://pyze.com/images/colorlogomark-whitetext.svg "Pyze")
 
-<img href = "http://pyze.com/images/colorlogomark-whitetext.svg" height="80" />
+<img src= "http://pyze.com/images/colorlogomark-whitetext.svg" height="80" alt="Pyze"/>
 
 # [Pyze] (http://pyze.com)
 
