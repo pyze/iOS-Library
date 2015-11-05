@@ -1,15 +1,6 @@
 ![alt text](http://pyze.com/images/colorlogomark-whitetext.svg "Pyze")
 
-
-<a href=" http://pyze.com" class="navbar-logo-color">
-							<img src="images/colorlogomark-whitetext.svg" alt="">
-						</a>
-
-
 # [Pyze] (http://pyze.com)
 
-# iOS-Library SDK Installation and Integration
-
-
-Click here for the instructions: 
+This is the [Pyze](http://pyze.com) framework github page.  We highly recommend installing the cocopods version.  read all about Installation and Integration in the Wiki Page
 ### https://github.com/pyze/iOS-Library/wiki
