@@ -2,7 +2,7 @@
 
 This is the [Pyze&reg;](http://pyze.com) iOS framework github page.  
 
-**Pyze is a Growth Intelligence&reg; platform for mobile app publishers**. Signup at Pyze, install and initilize the Pyze SDK and watch your app grow.
+**Pyze is a Growth Intelligence&reg; platform for mobile app publishers**. Signup at Pyze, install and initialize the Pyze SDK and watch your app grow.
 
 Pyze recommends installing the **cocopods** version instead of the Pyze.framework listed on this page. 
 
