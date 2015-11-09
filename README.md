@@ -15,4 +15,4 @@ Visit the wiki page below to learn more about:
 
 iOS versions supported are 7.x, 8.x and 9.x.
 
-[The Android Library can be found here] (https://github.com/pyze/Android-Library)]]
+[The Android Library can be found here] (https://github.com/pyze/Android-Library)
