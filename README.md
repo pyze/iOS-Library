@@ -1,4 +1,4 @@
-<img src="http://pyze.com/images/pyze-horizontal-color-RGB.svg" height="90" alt="Pyze"/>
+<a href="pyze.com" target="_Pyze"><img src="http://pyze.com/images/pyze-horizontal-color-RGB.svg" height="90" alt="Pyze"/></a>
 
 This is the [Pyze&reg;](http://pyze.com) iOS framework github page.  
 
