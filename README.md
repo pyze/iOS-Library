@@ -11,7 +11,7 @@ Visit the wiki page below to learn more about:
 * **initializing** it in your *Objective-C* or *Swift app*, and 
 * optionally using **events** in your *Objective-C* or *Swift* app
 
-#### [iOS Library Wiki] (https://github.com/pyze/iOS-Library/wiki)
+#### iOS Library <a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">Wiki</a>
 
 iOS versions supported are 7.x, 8.x and 9.x.
 
