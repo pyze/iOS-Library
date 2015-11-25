@@ -10,7 +10,7 @@ Pyze recommends installing the **CocoaPods** version instead of the Pyze.framewo
 * **installing** either the *CocoaPods* version or the *framework* version of the Pyze SDK, 
 * **initializing** it in your *Objective-C* or *Swift app*, and 
 * optionally using **events** in your *Objective-C* or *Swift* app
-* setting up push notifications on growth.pyze.com
+* setting up **push notifications** on growth.pyze.com
 
 #### iOS Library <a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">Wiki</a>
 
