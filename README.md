@@ -3,14 +3,12 @@
 <img src="http://pyze.com/images/apple.svg" height="26" />
 This is the [Pyze&reg;](http://pyze.com) iOS framework github page.  
 
-**Pyze is a Growth Intelligence&reg; platform for mobile app publishers**. Signup at Pyze, install and initialize the Pyze SDK and watch your app grow.
+**Pyze is a Growth Intelligence&reg; platform for mobile app publishers**. Signup at Pyze, install and initialize the Pyze SDK and watch your app grow.  Pyze highly recommends installing the **CocoaPods** version instead of the Pyze.framework listed on this page.  Visit the **<a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">wiki</a>** page to learn more about: 
 
-Pyze recommends installing the **CocoaPods** version instead of the Pyze.framework listed on this page.  Visit the **<a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">wiki</a>** page to learn more about: 
-
-* **installing** either the *CocoaPods* version or the *framework* version of the Pyze SDK, 
+* **installing** the preferred **CocoaPods** version (or the *framework* version of the Pyze SDK), 
 * **initializing** it in your *Objective-C* or *Swift app*, and 
 * optionally using **events** in your *Objective-C* or *Swift* app
-* setting up **push notifications** on growth.pyze.com and turning on **remote notifications** in Xcode 
+* optionally setting up **push notifications** on growth.pyze.com and turning on **remote notifications** in Xcode 
 
 #### iOS Library <a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">Wiki</a>
 
