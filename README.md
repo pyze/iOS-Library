@@ -9,7 +9,7 @@ This is the [Pyze&reg;](http://pyze.com) iOS framework github page.
 * **initializing** it in your *Objective-C* or *Swift app*, and 
 * optionally, 
     * using **events** in your *Objective-C* or *Swift* app
-    * setting up **push notifications** on growth.pyze.com and turning on **remote notifications** in Xcode 
+    * setting up **push notifications** 
 
 #### iOS Library <a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">Wiki</a>
 
