@@ -7,9 +7,7 @@ This is the [Pyze&reg;](http://pyze.com) iOS framework github page.
 
 * **installing** the recommended and preferred **CocoaPods** version *(or the framework version of the Pyze SDK if you don't use CocoaPods)*,
 * **initializing** it in your *Objective-C* or *Swift app*, and 
-* optionally, 
-    * using **events** in your *Objective-C* or *Swift* app
-    * setting up **push notifications** 
+* optionally, using **events** and setting up **push notifications** 
 
 #### iOS Library <a href="https://github.com/pyze/iOS-Library/wiki" target="wiki">Wiki</a>
 
