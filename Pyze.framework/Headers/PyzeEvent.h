@@ -1793,5 +1793,19 @@ forContentReference:(NSString *) contentReference
 
 @end
 
+/**
+ *  ### PyzeDrone
+ *  Subclass of PyzeCustomEvent class used post details of the events related to management onf Drones, Quadcopters and other iOS controlled devices over bluetooth, adhoc WiFi.
+ *  @since v1.0.6
+ */
+//@interface PyzeDrone : PyzeCustomEvent
+
+/// @name Class Methods
+/// @name Class Methods
+
+
+
+//@end
+
 NS_ASSUME_NONNULL_END
 
