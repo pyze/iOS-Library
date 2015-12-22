@@ -1,6 +1,121 @@
 
 @import Foundation;
 
+#pragma mark - Custom Events 
+
+/**
+ *  PyzeCustomEvent
+ *  If the built in event classes do not serve the purpose of your requirement, you can use Custom Events.
+ */
+@interface PyzeCustomEvent : NSObject
+
+/// @name Class Methods
+
+/**
+ *  Base class method which will post the data to server.
+ *
+ *  @param eventName  The event name to capture.
+ *  @param attributes Additional custom attributes the app would want to share with server.
+ *  @since v1.0.0
+ */
++(void) postWithEventName:(nonnull NSString *) eventName withAttributes:(nullable NSDictionary *)attributes;
+
+@end
+
+
+#pragma mark -  Explicit Activation 
+
+/**
+ *  ### PyzeExplicitActivation
+ *  Subclass of PyzeCustomEvent class used to send an explicit activation.
+ */
+@interface PyzeExplicitActivation : PyzeCustomEvent
+
+/**
+ *  Post explicit activation convenience method
+ */
++ (void) post;
+
+/**
+ *  Post explicit activation convenience method with parameters.
+ *
+ *  @param attributeDictionary Additional custom attributes app would like to share with server.
+ */
++ (void) post: (nullable NSDictionary *)attributeDictionary;
+
+@end
+
+NS_ASSUME_NONNULL_BEGIN
+
+#pragma mark - Account and Identity Classes
+
+/**
+ *  ### PyzeAccount
+ *  Subclass of PyzeCustomEvent class used to post the details related to Accounts.
+ *  @since v1.0.0
+ */
+@interface PyzeAccount : PyzeCustomEvent
+
+/// @name Registration
+
+/**
+ *  Post registration offered details.
+ *
+ *  @param attributes Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postRegistrationOffered:( NSDictionary *) attributes;
+
+/**
+ *  Post registration started details.
+ *
+ *  @param attributes Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postRegistrationStarted:(NSDictionary *) attributes;
+
+/**
+ *  Post registration completed details.
+ *
+ *  @param attributes Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postRegistrationCompleted:(NSDictionary *) attributes;
+
+/// @name Login / Logout
+
+/**
+ *  Post the login operation completion details.
+ *
+ *  @param success    a status to indicate the operation successful or failed.
+ *  @param errCodeStr On error, pass the localizedDescription to this parameter.
+ *  @param dictionary Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postLoginCompleted:(BOOL) success withErrCode:(NSString *) errCodeStr withAttributes:(NSDictionary *) dictionary;
+
+/**
+ *  Post logout details
+ *
+ *  @param logoutExplicit A boolean status to determine whether logout is explicit logout or not.
+ *  @param dictionary     Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postLogoutCompleted:(BOOL)logoutExplicit withAttributes:(NSDictionary *) dictionary;
+
+/// @name Password Reset
+
+/**
+ *  Post password reset request details.
+ *
+ *  @param dictionary Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postPasswordResetRequest:(NSDictionary *) dictionary;
+
+@end
+
+
 /**
  *  PyzeIdentity
  *  You can use this class to send the user's traits to Pyze.  This information is solely used to reachout to the user via channels you provide (email, SMS, MMS, Push Notifications, etc).  Pyze does not require or track user information.  Set the identifers you want to send and then call postIfChanged.
@@ -105,34 +220,8 @@
 
 @end
 
-/**
- *  PyzeCustomEvent
- *  Base class for events
- */
-@interface PyzeCustomEvent : NSObject
 
-/// @name Class Methods
-
-/**
- *  Base class method which will post the data to server.
- *
- *  @param eventName  The event name to capture.
- *  @param attributes Additional custom attributes the app would want to share with server.
- *  @since v1.0.0
- */
-+(void) postWithEventName:(nonnull NSString *) eventName withAttributes:(nullable NSDictionary *)attributes;
-
-@end
-
-@interface PyzeExplicitActivation : PyzeCustomEvent
-
-+ (void) post;
-
-+ (void) post: (nullable NSDictionary *)attributeDictionary;
-
-@end
-
-#pragma mark - Ad
+#pragma mark - Advertisement Tracking Class
 
 
 /**
@@ -196,7 +285,8 @@
 
 @end
 
-NS_ASSUME_NONNULL_BEGIN
+#pragma mark - Advocacy and Feedback Class
+
 /**
  *  ### PyzeAdvocacy
  *  Subclass of PyzeCustomEvent class used for posting support for feedbacks.
@@ -231,74 +321,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(void) postRequestRating:(NSDictionary *)attributes;
 
 @end
-NS_ASSUME_NONNULL_END
 
-NS_ASSUME_NONNULL_BEGIN
-/**
- *  ### PyzeAccount
- *  Subclass of PyzeCustomEvent class used to post the details related to Accounts.
- *  @since v1.0.0
- */
-@interface PyzeAccount : PyzeCustomEvent
-
-/// @name Registration
-
-/**
- *  Post registration offered details.
- *
- *  @param attributes Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postRegistrationOffered:(NSDictionary *) attributes;
-
-/**
- *  Post registration started details.
- *
- *  @param attributes Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postRegistrationStarted:(NSDictionary *) attributes;
-
-/**
- *  Post registration completed details.
- *
- *  @param attributes Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postRegistrationCompleted:(NSDictionary *) attributes;
-
-/// @name Login / Logout
-
-/**
- *  Post the login operation completion details.
- *
- *  @param success    a status to indicate the operation successful or failed.
- *  @param errCodeStr On error, pass the localizedDescription to this parameter.
- *  @param dictionary Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postLoginCompleted:(BOOL) success withErrCode:(NSString *) errCodeStr withAttributes:(NSDictionary *) dictionary;
-
-/**
- *  Post logout details
- *
- *  @param logoutExplicit A boolean status to determine whether logout is explicit logout or not.
- *  @param dictionary     Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postLogoutCompleted:(BOOL)logoutExplicit withAttributes:(NSDictionary *) dictionary;
-
-/// @name Password Reset
-
-/**
- *  Post password reset request details.
- *
- *  @param dictionary Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postPasswordResetRequest:(NSDictionary *) dictionary;
-
-@end
+#pragma mark - Mobile Commerce classes
 
 /**
  *  ### PyzeCommerceDiscovery
@@ -523,8 +547,6 @@ NS_ASSUME_NONNULL_BEGIN
     withAttributes:(NSDictionary *)attributes;
 
 @end
-
-#pragma  mark - CommerceBeacon
 
 /**
  *  ### PyzeCommerceBeacon
@@ -1079,12 +1101,15 @@ withItemSharedWith:(NSString *) sharedWith
 +(void) postRevenue:(NSNumber*) revenue withPaymentInstrument: (NSString*) paymentInstrument withAttributes:(NSDictionary*) attributes;
 @end
 
+
+
+#pragma mark - Mobile Gaming
+
 /**
  *  ### PyzeGaming
  *  Subclass of PyzeCustomEvent class used post details of the events related to Gaming.
  *  @since v1.0.0
  */
-
 @interface PyzeGaming : PyzeCustomEvent
 
 /// @name Class Methods
@@ -1258,6 +1283,7 @@ withItemSharedWith:(NSString *) sharedWith
 
 @end
 
+#pragma mark - Mobile Health and Fitness class
 
 /**
  *  ### PyzeHealthAndFitness
@@ -1470,80 +1496,6 @@ withUniqueContentId:(NSString *) contentId
 @end
 
 /**
- *  ### PyzeInAppPurchaseRevenue
- *  Subclass of PyzeCustomEvent class used post details of the events related to In-App purchase.
- *  @since v1.0.0
- */
-
-@interface  PyzeInAppPurchaseRevenue : PyzeCustomEvent
-
-/// @name Class Methods
-/// @name Class Methods
-
-/**
- *  Post price list viewed in purchases
- *
- *  @param appScreenRequestFromId App screen requested identifier.
- *  @param attributes             Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postPriceListViewViewed:(NSString *) appScreenRequestFromId withAttributes:(NSDictionary *) attributes;
-
-/**
- *  Post details of item bought.
- *
- *  @param itemName            Item name.
- *  @param revenue             Revenue value.
- *  @param currencyISO4217Code Currency code $ or Rs.
- *  @param attributes          Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postBuyItem:(NSString *) itemName
-              price:(NSDecimalNumber *) revenue
-           currency:(NSString *) currencyISO4217Code
-     withAttributes:(NSDictionary *) attributes;
-
-/**
- *  Post details of item bought in USD.
- *
- *  @param itemName   Item name.
- *  @param revenue    Revenue value.
- *  @param attributes Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postBuyItemInUSD:(NSString *) itemName
-                   price:(NSDecimalNumber *) revenue
-          withAttributes:(NSDictionary *) attributes;
-
-/**
- *  Post details of the item bought
- *
- *  @param itemName               Item name.
- *  @param revenue                Revenue value.
- *  @param currencyISO4217Code    Currency code.
- *  @param itemType               Item type.
- *  @param itemSKU                Item SKU.
- *  @param quantity               Number of item purchased.
- *  @param appScreenRequestFromId App screen requested identifier.
- *  @param success                Success or failure.
- *  @param successOrErrorCode     Error code on fail.
- *  @param attributes             Additional custom attributes app would like to share with server.
- *  @since v1.0.0
- */
-+(void) postBuyItem:(NSString *) itemName
-              price:(NSDecimalNumber *) revenue
-           currency:(NSString *) currencyISO4217Code
-           itemType:(NSString *) itemType
-            itemSKU:(NSString *) itemSKU
-           quantity:(NSString *) quantity
-          requestId:(NSString *) appScreenRequestFromId
-             status: (BOOL) success
-        successCode:(NSString *) successOrErrorCode
-     withAttributes:(NSDictionary *)attributes;
-@end
-
-
-/**
  *  ### PyzeTasks
  *  Subclass of PyzeCustomEvent class used post details of the events related to Tasks.
  *  @since v1.0.0
@@ -1561,6 +1513,7 @@ withUniqueContentId:(NSString *) contentId
 +(void)  addToCalendarwithAttributes:(NSDictionary *)attributes;
 
 @end
+
 
 /**
  *  ### PyzeSocial
@@ -1649,6 +1602,8 @@ forContentReference:(NSString *) contentReference
 
 @end
 
+#pragma mark - Media Class - Video, Audio, Pictures etc.
+
 /**
  *  ### PyzeMedia
  *  Subclass of PyzeCustomEvent class used post details of the events related to Media.
@@ -1733,6 +1688,82 @@ forContentReference:(NSString *) contentReference
 
 @end
 
+#pragma mark - In-App Purchase and Bitcoin Classes
+
+/**
+ *  ### PyzeInAppPurchaseRevenue
+ *  Subclass of PyzeCustomEvent class used post details of the events related to In-App purchase.
+ *  @since v1.0.0
+ */
+
+@interface  PyzeInAppPurchaseRevenue : PyzeCustomEvent
+
+/// @name Class Methods
+/// @name Class Methods
+
+/**
+ *  Post price list viewed in purchases
+ *
+ *  @param appScreenRequestFromId App screen requested identifier.
+ *  @param attributes             Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postPriceListViewViewed:(NSString *) appScreenRequestFromId withAttributes:(NSDictionary *) attributes;
+
+/**
+ *  Post details of item bought.
+ *
+ *  @param itemName            Item name.
+ *  @param revenue             Revenue value.
+ *  @param currencyISO4217Code Currency code $ or Rs.
+ *  @param attributes          Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postBuyItem:(NSString *) itemName
+              price:(NSDecimalNumber *) revenue
+           currency:(NSString *) currencyISO4217Code
+     withAttributes:(NSDictionary *) attributes;
+
+/**
+ *  Post details of item bought in USD.
+ *
+ *  @param itemName   Item name.
+ *  @param revenue    Revenue value.
+ *  @param attributes Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postBuyItemInUSD:(NSString *) itemName
+                   price:(NSDecimalNumber *) revenue
+          withAttributes:(NSDictionary *) attributes;
+
+/**
+ *  Post details of the item bought
+ *
+ *  @param itemName               Item name.
+ *  @param revenue                Revenue value.
+ *  @param currencyISO4217Code    Currency code.
+ *  @param itemType               Item type.
+ *  @param itemSKU                Item SKU.
+ *  @param quantity               Number of item purchased.
+ *  @param appScreenRequestFromId App screen requested identifier.
+ *  @param success                Success or failure.
+ *  @param successOrErrorCode     Error code on fail.
+ *  @param attributes             Additional custom attributes app would like to share with server.
+ *  @since v1.0.0
+ */
++(void) postBuyItem:(NSString *) itemName
+              price:(NSDecimalNumber *) revenue
+           currency:(NSString *) currencyISO4217Code
+           itemType:(NSString *) itemType
+            itemSKU:(NSString *) itemSKU
+           quantity:(NSString *) quantity
+          requestId:(NSString *) appScreenRequestFromId
+             status: (BOOL) success
+        successCode:(NSString *) successOrErrorCode
+     withAttributes:(NSDictionary *)attributes;
+@end
+
+
 /**
  *  ### PyzeBitcoin
  *  Subclass of PyzeCustomEvent class used post details of the events related to Bitcoins.
@@ -1793,19 +1824,283 @@ forContentReference:(NSString *) contentReference
 
 @end
 
+#pragma mark - Pyze Drone and Quadcopter Event tracking
+
 /**
  *  ### PyzeDrone
- *  Subclass of PyzeCustomEvent class used post details of the events related to management onf Drones, Quadcopters and other iOS controlled devices over bluetooth, adhoc WiFi.
- *  @since v1.0.6
+ *  Subclass of PyzeCustomEvent class used post details of the events related to management of Drones, Quadcopters and other iOS controlled devices over bluetooth, and or adhoc WiFi.
+ *  @since v1.6.0
  */
-//@interface PyzeDrone : PyzeCustomEvent
+@interface PyzeDrone : PyzeCustomEvent
 
 /// @name Class Methods
-/// @name Class Methods
+
+/**
+ *  Post Preflight health check
+ *  Before begining a flight it is a good idea to do a quick health check of both the drone and
+ *  transmitter / controller (i.e. the device and app). A Preflight health check could include the
+ *  storage (usually a micro SD card) presence and status if the drone is equipped with a camera,
+ *  battery status of drone and device, calibration status and satellite lock status for GPS equipped drones.
+ *
+ *  @param overallStatus summary of overall status
+ *  @param storageStatus storage (usually a micro SD card) presence and status if the drone is equipped with a camera
+ *  @param droneBatteryChargePercent drone battery status
+ *  @param deviceBatteryChargePercent controller device status
+ *  @param calibrationStatus callibration status
+ *  @param gpsStatus gps Status if drone is GPS equipped
+ *  @param attributes Additional custom attributes
+ *  @since v1.6.0
+ */
++(void) postPreflightCheckCompleted:(NSString *) overallStatus
+                  withStorageStatus:(NSString *) storageStatus
+                   withDroneBattery:(NSInteger) droneBatteryChargePercent
+             withTransmitterBattery:(NSInteger) deviceBatteryChargePercent
+              withCalibrationStatus:(NSString *) calibrationStatus
+                      withGPSStatus:(NSString *) gpsStatus
+                     withAttributes:(NSDictionary *) attributes;
+
+/**
+ *  Inflight health check
+ *  @param overallStatus summary of overall status
+ *  @param rollStatus - acomplished by controlling the Aileron (moving right stick to the left or right) which maneuvers the drone / quadcopter left or right.
+ *  @param pitchStatus - acomplished by controlling the Elevator (moving right stick forwards or backwards) which maneuvers the drone / quadcopter forwards or backwards.
+ *  @param yawStatus – acomplished by controlling Rudder (moving the left stick to the left or to the right)  Rotates the drone / quadcopter left or right. Points the front of the drone / quadcopter different directions and helps with changing directions while flying.
+ *  @param throttleStatus – acomplished by controlling Throttle. Engaged by pushing the left stick forwards. Disengaged by pulling the left stick backwards. This adjusts the altitude, or height, of the quadcopter.
+ *  @param trimmingSettings - Adjust roll, pitch, yaw, and throttle if they are off balance. e.g. "+20-20+4+0" would mean adjustments in percent of 20%, -20%, +4% and 0% for roll, pitch, yaw, and throttle respectively.
+ *  @param attributes Additional custom attributes
+ *  @since v1.6.0
+ */
++(void) postInflightCheckCompleted:(NSString *) overallStatus
+                          withRoll:(NSString *) rollStatus
+                         withPitch:(NSString *) pitchStatus
+                           withYaw:(NSString *) yawStatus
+                      withThrottle:(NSString *) throttleStatus
+                          withTrim:(NSString *) trimmingSettings
+                    withAttributes:(NSDictionary *)attributes;
+
+/**
+ *  Drone is connected to controlling device.  Time to connect depends on surroundings and interference. Post this after successfully connecting
+ *  @param attributes Additional custom attributes
+ */
++(void) postConnected:(NSDictionary *)attributes ;
+
+/**
+ *  Drone is disconnected from controlling device either explicitly or because of environment or distance
+ *  @param code disconnection code indicating how disconnected from the controller's point of view
+ *  @param attributes Additional custom attributes
+ */
++(void) postDisconnected:(NSString *) code
+          withAttributes:(NSDictionary *) attributes;
+
+/**
+ *  Drone is Airborne
+ *  @param status Drone status if any
+ *  @param attributes Additional custom attributes
+ */
++(void) postAirborne:(NSString *) status
+      withAttributes:(NSDictionary *)attributes ;
+
+/**
+ * Drone Landed
+ *  @param status Drone status if any
+ *  @param attributes Additional custom attributes
+ */
++(void)  postLanded:(NSString *) status
+     withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  New Flight path created
+ *  @param uniqueFlightPathId - Every Flight Path should be associated with a unique identifier or name
+ *  @param attributes Additional custom attributes
+ */
++(void) postFlightPathCreated:(NSString *) uniqueFlightPathId
+               withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  Flight path uploaded to drone
+ *  @param uniqueFlightPathId - Every Flight Path should be associated with a unique identifier or name
+ *  @param attributes Additional custom attributes
+ */
++(void)  postFlightPathUploaded:(NSString *) uniqueFlightPathId
+                 withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  Flight path created edited on controller and should be re-uplooaded
+ *  @param uniqueFlightPathId - Every Flight Path should be associated with a unique identifier or name
+ *  @param attributes Additional custom attributes
+ */
++(void)  postFlightPathEdited:(NSString *) uniqueFlightPathId
+               withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  Flight path deleted
+ *  @param uniqueFlightPathId - Every Flight Path should be associated with a unique identifier or name
+ *  @param attributes Additional custom attributes
+ */
++(void)  postFlightPathDeleted:(NSString *) uniqueFlightPathId
+                withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  Flight path flown
+ *  @param uniqueFlightPathId - Every Flight Path should be associated with a unique identifier or name
+ *  @param attributes Additional custom attributes
+ */
++(void)  postFlightPathCompleted:(NSString *) uniqueFlightPathId
+                  withAttributes:(NSDictionary *)attributes;
+
+/**
+ *  First Person View Enabled.  this allows a lower quality video to be transmitted to controller in near realtime with an acceptable lag
+ *  @param status - status on FPV
+ *  @param attributes Additional custom attributes
+ */
++(void)  postFirstPersonViewEnabled:(NSString *) status
+                     withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  First Person View Disabled.
+ *  @param status - status on FPV
+ *  @param attributes Additional custom attributes
+ */
++(void)  postFirstPersonViewDisabled:(NSString *) status
+                      withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  Started taking aerial video identifed by video identifier
+ *  @param status - status
+ *  @param attributes Additional custom attributes
+ */
++(void)  postStartedAerialVideo:(NSString *) status
+                 withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  Started taking aerial video identifed by video identifier
+ *  @param status - status
+ *  @param videoIdentifer - Video Identifier
+ *  @param attributes Additional custom attributes
+ */
++(void)  postStartedAerialVideo:(NSString *) status
+                 videoIdentifer:(NSString *) videoIdentifer
+                 withAttributes:(NSDictionary *)attributes;
+
+/**
+ *  Stopped taking aerial video
+ *  @param videoIdentifer - Video Identifier
+ *  @param attributes Additional custom attributes
+ */
++(void)  postStoppedAerialVideo:(NSString *) videoIdentifer
+                     withLength:(NSString *) secondsLength
+                 withAttributes:(NSDictionary *)attributes ;
 
 
+/**
+ *  Took Aerial Picture
+ *  @param status - status
+ *  @param attributes Additional custom attributes
+ */
++(void)  postTookAerialPicture:(NSString *) status
+                withAttributes:(NSDictionary *)attributes ;
 
-//@end
+/**
+ *  Started taking Aerial Timelapse - In Time-lapse drone photography the frequency at which frames are captured
+ *  (the frame rate) is much lower than that used to view the sequence. When played at normal speed, time appears
+ *  to be moving faster and thus lapsing. For example, an image of a scene may be captured once every second,
+ *  then played back at 30 frames per second; the result is an apparent 30 times speed increase.  Specify total shots
+ *  and seconds between shots.  The playback time would be approximately be the product of total shots and seconds betwwen shots
+ *
+ *  @param status - status
+ *  @param totalshots - Total Number of shots
+ *  @param secondsBetweenShots - delay between shots
+ *  @param attributes Additional custom attributes
+ */
++(void)  postStartedAerialTimelapse:(NSString *) status
+                         totalShots:(NSInteger) totalshots
+                  delayBetweenShots:(NSInteger) secondsBetweenShots
+                     withAttributes:(NSDictionary *) attributes ;
+
+/**
+ *  Stopped Aerial Timelapse
+ *  @param status - status (interupted / completed)
+ *  @param attributes Additional custom attributes
+ */
++(void)  postStoppedAerialTimelapse:(NSString *) status
+                     withAttributes:(NSDictionary *) attributes ;
+
+/**
+ *  Requested Drone to return to base
+ *  @param attributes Additional custom attributes
+ */
++(void)  postRequestedReturnToBase:(NSDictionary *)attributes ;
+
+/**
+ *  Switched to Helicopter flying mode.  Similar to flying a helicopter,
+ *  once you tilt the quadcopter (roll) it will not auto-level itself back to
+ *  its original position. Even if you let go of the stick and it returns to
+ *  the middle, the drone will stay tilted.  Not all drones support this Manual mode.
+ *
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSwitchedToHelicopterFlyingMode:(NSDictionary *)attributes ;
+
+/**
+ *  Switched to Attitude or Auto-level flying mode.  Once the sticks are centered, the drone will level itself out
+ *
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSwitchedToAttitudeFlyingMode:(NSDictionary *)attributes ;
+
+/**
+ *  Switched to GPS Hold flying mode – Returns the drone's position once the sticks have been centered.
+ *  The same as attitude mode (auto-level) but using an on-board GPS.  Drones that support GPS usually have this mode.
+ *
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSwitchedToGPSHoldFlyingMode:(NSDictionary *)attributes ;
+
+/**
+ *  Switched to Custom Device Mode identified by a numeric mode.  Some drones have numbered modes 1, 2, 3.
+ *
+ *  @param mode - Numeric custom mode
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSwitchedToCustomFlyingMode: (NSInteger) mode
+                         withAttributes: (NSDictionary *)attributes ;
+
+/**
+ *  Drones that support GPS can limit the altitude to avoid flying into restricted airspace
+ *
+ *  @param altitudeInMeters - altitude in meters. One foot is 0.3048 meters.
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSetMaxAltitude:(NSInteger) altitudeInMeters
+             withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  This feature is avilable on drones that are used for surveying.  If the drone has to survey 4 jobs you can specify the time in seconds for a job to ensure enough battery is available for subsequent jobs.  The math is performed by app
+ *
+ *  @param seconds - seconds to return in
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSetAutoReturnInSeconds:(NSInteger) seconds
+                     withAttributes:(NSDictionary *)attributes ;
+
+/**
+ *  The drone can be requested to return when storage memory reaches a low threshold. (See customer ticket #2312)
+ *
+ *  @param memoryLeftInKilobytes - return when storage is below memoryLeftInKilobytes
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSetAutoReturnWhenLowMemory:(NSInteger) memoryLeftInKilobytes
+                         withAttributes:(NSDictionary *)attributes ;
+/**
+ *  The drone can be requested to return when battery reaches a low threshold.
+ *
+ *  @param batterylevelPercent - return when battery is below batterylevelPercent
+ *  @param attributes Additional custom attributes
+ */
++(void)  postSetAutoReturnWhenLowBattery:(NSInteger) batterylevelPercent
+                          withAttributes:(NSDictionary *)attributes ;
+
+@end
 
 NS_ASSUME_NONNULL_END
 
