@@ -1,7 +1,7 @@
 
 @import Foundation;
 
-#pragma mark - Custom Events 
+#pragma mark - Pyze Custom Events 
 
 /**
  *  PyzeCustomEvent
@@ -16,14 +16,16 @@
  *
  *  @param eventName  The event name to capture.
  *  @param attributes Additional custom attributes the app would want to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postWithEventName:(nonnull NSString *) eventName withAttributes:(nullable NSDictionary *)attributes;
 
 @end
 
 
-#pragma mark -  Explicit Activation 
+#pragma mark - Pyze  Explicit Activation 
 
 /**
  *  ### PyzeExplicitActivation
@@ -47,13 +49,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - Account and Identity Classes
+#pragma mark - Pyze Account and Identity
 
 /**
  *  ### PyzeAccount
  *  Subclass of PyzeCustomEvent class used to post the details related to Accounts.
+ 
  *  @since v1.0.0
  */
+
 @interface PyzeAccount : PyzeCustomEvent
 
 /// @name Registration
@@ -62,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post registration offered details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
  */
 +(void) postRegistrationOffered:( NSDictionary *) attributes;
@@ -70,6 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post registration started details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
  */
 +(void) postRegistrationStarted:(NSDictionary *) attributes;
@@ -78,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post registration completed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
  */
 +(void) postRegistrationCompleted:(NSDictionary *) attributes;
@@ -90,7 +97,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success    a status to indicate the operation successful or failed.
  *  @param errCodeStr On error, pass the localizedDescription to this parameter.
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postLoginCompleted:(BOOL) success withErrCode:(NSString *) errCodeStr withAttributes:(NSDictionary *) dictionary;
 
@@ -99,7 +108,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param logoutExplicit A boolean status to determine whether logout is explicit logout or not.
  *  @param dictionary     Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postLogoutCompleted:(BOOL)logoutExplicit withAttributes:(NSDictionary *) dictionary;
 
@@ -109,7 +120,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post password reset request details.
  *
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPasswordResetRequest:(NSDictionary *) dictionary;
 
@@ -119,7 +132,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  PyzeIdentity
  *  You can use this class to send the user's traits to Pyze.  This information is solely used to reachout to the user via channels you provide (email, SMS, MMS, Push Notifications, etc).  Pyze does not require or track user information.  Set the identifers you want to send and then call postIfChanged.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeIdentity : NSObject
 
@@ -129,7 +144,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set App specific User Identifer.  Use this to identify users by an app specific trait. Examples include: username, userid, hashedid.  It is highly recommended you do not send PII.  Call postIfChanged after setting all identifiers.
  *
  *  @param appSpecificUserId An app specific user identifer
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
 +(void) setAppSpecificUserId:(nonnull NSString *) appSpecificUserId;
@@ -138,7 +155,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set user's Facebook Identifer. Call postIfChanged after setting all identifiers.
  *
  *  @param fbId facebook identifer
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
 +(void) setFbID:(nonnull NSString *) fbId;
@@ -147,7 +166,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set user's twitter Identifer. Call postIfChanged after setting all identifiers.
  *
  *  @param twitterId twitter identifer
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
 +(void) setTwitterId: (nonnull NSString *) twitterId;
@@ -156,7 +177,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set user's email address if you use email to reachout to users. Call postIfChanged after setting all identifiers.
  *
  *  @param emailAddress Email address to reachout to users.
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
 +(void) setEmail:(nonnull NSString *) emailAddress;
@@ -165,25 +188,31 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set user's phone number. Call postIfChanged after setting all identifiers.
  *
  *  @param phoneNumber Phone number to reachout.
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
- +(void) setPhoneNumber:(nonnull NSString *) phoneNumber;
++(void) setPhoneNumber:(nonnull NSString *) phoneNumber;
 
 /**
  *  Set user's push Notification Identifer. Call postIfChanged after setting all identifiers.
  *
  *  @param pushNotificationId Notification Identifer.
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
-*/
+ */
 +(void) setPushNotificationRegistrationId:(nonnull NSString *) pushNotificationId;
 
 /**
  *  Set user's username. Call postIfChanged after setting all identifiers.
  *
  *  @param userName User name to track.
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
 +(void) setUserName:(nonnull NSString *) userName;
@@ -193,7 +222,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param value Custom value to add to identity object.
  *  @param key   Key for the custom value.
+ 
  *  @since v1.0.0
+ 
  *  @see postIfChanged
  */
 +(void) setCustomUserIdentifier:(nonnull NSString *) value forKey:(nonnull NSString *) key;
@@ -204,7 +235,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Retrieving method for identities.
  *
  *  @return identities Set of key-value pairs of NSDictionary object containing Identities set or nil.
+ 
  *  @since v1.0.0
+ 
  */
 +(nullable NSDictionary *) identities;
 
@@ -212,7 +245,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Call this method after all the identifers are set.  This sends changed traits to Pyze Servers.
+ 
  *  @since v1.0.0
+ 
  *  @warning Call this to send traits to Pyze
  *  @see identities
  */
@@ -221,7 +256,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-#pragma mark - Advertisement Tracking Class
+#pragma mark - Pyze In-App Advertisement Tracking
 
 
 /**
@@ -241,7 +276,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param size       Size of the ad.
  *  @param type       Type of ad for example Interstitial, Banner Ads, DFP ads etc.,
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAdRequested:(nullable NSString *)adNetwork
           fromAppScreen:(nonnull NSString *)appScreen
@@ -257,7 +294,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param resultCode Result code received, if any.
  *  @param success    Success or failed to load the ad.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAdReceived:(nullable NSString *)adNetwork
          fromAppScreen:(nonnull NSString *)appScreen
@@ -274,7 +313,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success    Success or failed to load the ad.
  *  @param errorCode  Pass the errorCode if ad click operation fails.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAdClicked:(nullable NSString *)adNetwork
         fromAppScreen:(nonnull NSString *)appScreen
@@ -285,12 +326,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-#pragma mark - Advocacy and Feedback Class
+#pragma mark - Pyze Advocacy and Feedback Class
 
 /**
  *  ### PyzeAdvocacy
  *  Subclass of PyzeCustomEvent class used for posting support for feedbacks.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeAdvocacy : PyzeCustomEvent
 
@@ -300,7 +343,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post request for feedback.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRequestForFeedback:(NSDictionary *)attributes;
 
@@ -308,7 +353,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post the feedback received.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postFeedbackProvided:(NSDictionary *)attributes;
 
@@ -316,18 +363,22 @@ NS_ASSUME_NONNULL_BEGIN
  *  Post request rating.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRequestRating:(NSDictionary *)attributes;
 
 @end
 
-#pragma mark - Mobile Commerce classes
+#pragma mark - Pyze Mobile Commerce
 
 /**
  *  ### PyzeCommerceDiscovery
  *  Subclass of PyzeCustomEvent used to post the details of events related to Discovery of a item in particular category.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceDiscovery : PyzeCustomEvent
 
@@ -339,7 +390,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param searchString Search string used
  *  @param latency      Latency to complete the operation.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 
 +(void) postSearched:(NSString *) searchString
@@ -350,7 +403,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param category   Category name
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBrowsedCategory:(NSString *) category
              withAttributes:(NSDictionary *)attributes;
@@ -360,7 +415,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param uniqueDealID Unique deal identification string/number.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBrowsedDeals:(NSString *) uniqueDealID
           withAttributes:(NSDictionary *)attributes;
@@ -370,7 +427,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param uniqueRecommendationID uniqueRecommendationID containing a string/number.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBrowsedRecommendations:(NSString *) uniqueRecommendationID
                     withAttributes:(NSDictionary *)attributes;
@@ -381,7 +440,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param rangeStart Starting range of the order browsed.
  *  @param rangeEnd   Ending range of the order browsed.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBrowsedPrevOrders:(NSString *) rangeStart
                       withEnd:(NSString *) rangeEnd
@@ -391,7 +452,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  ### PyzeCommerceCuratedList
  *  Subclass of PyzeCustomEvent class used post details of the events related to curated list.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceCuratedList: PyzeCustomEvent
 
@@ -404,7 +467,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param uniqueCuratedListID Curated list id.
  *  @param curatedListType     Type of curated list.
  *  @param attributes          Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postCreated:(NSString *) uniqueCuratedListID
            withType:(NSString *) curatedListType
@@ -416,7 +481,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param curatedList        Curated list id.
  *  @param curatedListCreator Curated list creation id.
  *  @param attributes         Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBrowsed:(NSString *) curatedList
         withCreator:(NSString *) curatedListCreator
@@ -429,7 +496,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param itemCategory        Category name to add the item.
  *  @param itemID              Item id details.
  *  @param attributes          Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddedItem:(NSString *) uniqueCuratedListId
          withCategory:(NSString *) itemCategory
@@ -443,7 +512,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param curatedListType     Curated list type.
  *  @param itemID              Item id details.
  *  @param attributes          Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRemovedItem:(NSString *) uniqueCuratedListID
            withListType:(NSString *) curatedListType
@@ -456,7 +527,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param curatedList        Curated list name
  *  @param curatedListCreator Creator id of curated list.
  *  @param attributes         Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postShared:(NSString *) curatedList
        withCreator:(NSString *) curatedListCreator
@@ -468,7 +541,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param curatedList        Curated list name.
  *  @param curatedListCreator Curated list creator id.
  *  @param attributes         Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPublished:(NSString *) curatedList
           withCreator:(NSString *) curatedListCreator
@@ -479,7 +554,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  ### PyzeCommerceWishList
  *  Subclass of PyzeCustomEvent class used post details of the events related to wish list.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceWishList : PyzeCustomEvent
 
@@ -492,7 +569,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param uniqueWishListId Unique wish list id.
  *  @param wishListtype     Wish list type.
  *  @param attributes       Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postCreated:(NSString *) uniqueWishListId
    withWishListType:(NSString *) wishListtype
@@ -503,7 +582,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param uniqueWishListId Wish list identifier.
  *  @param attributes       Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBrowsed:(NSString *) uniqueWishListId
      withAttributes:(NSDictionary *)attributes;
@@ -515,7 +596,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param itemCategory     Item category the item added to.
  *  @param itemId           Item id details.
  *  @param attributes       Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddedItem:(NSString *) uniqueWishListId
      withItemCategory:(NSString *) itemCategory
@@ -529,7 +612,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param itemCategory     Item category the item removed from.
  *  @param itemId           Item id details.
  *  @param attributes       Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRemovedItem:(NSString *) uniqueWishListId
        withItemCategory:(NSString *) itemCategory
@@ -541,7 +626,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param uniqueWishListId Wish list identitier.
  *  @param attributes       Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postShared:(NSString *) uniqueWishListId
     withAttributes:(NSDictionary *)attributes;
@@ -551,7 +638,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  ### PyzeCommerceBeacon
  *  Subclass of PyzeCustomEvent class used post details of the events related to beacon.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceBeacon : PyzeCustomEvent
 
@@ -566,7 +655,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param iBeaconMinor           Beacon minor identifier.
  *  @param uniqueRegionIdentifier Registration identifier.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postEnteredRegion:(NSString *) iBeaconUUID
           withBeaconMajor:(NSString *) iBeaconMajor
@@ -582,7 +673,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param iBeaconMinor           Beacon minor identifier.
  *  @param uniqueRegionIdentifier Registration identifier.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postExitedRegion:(NSString *) iBeaconUUID
          withBeaconMajor:(NSString *) iBeaconMajor
@@ -600,7 +693,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param proximity              Proximity state i.e. near or far.
  *  @param actionId               Action identifier.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postTransactedInRegion:(NSString *) iBeaconUUID
                withBeaconMajor:(NSString *) iBeaconMajor
@@ -614,7 +709,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
 /**
  *  ### PyzeCommerceCart
  *  Subclass of PyzeCustomEvent class used post details of the events related to Cart.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceCart : PyzeCustomEvent
 
@@ -628,7 +725,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemCategory Item category identifier.
  *  @param itemId       Item id details.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItem:(NSString *) cartId
    withItemCategory:(NSString *) itemCategory
@@ -643,7 +742,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId       Item id details.
  *  @param uniqueDealId Unique deal identifier.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromDeals:(NSString *) cartId
             withItemCategory:(NSString *) itemCategory
@@ -658,7 +759,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId           Item id details.
  *  @param uniqueWishListId Unique wish list identifier.
  *  @param attributes       Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromWishList:(NSString *) cartId
                withItemCategory:(NSString *) itemCategory
@@ -674,7 +777,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId              Item id details.
  *  @param uniqueCuratedListId Unique curated list identifier.
  *  @param attributes          Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromCuratedList:(NSString *) cartId
                   withItemCategory:(NSString *) itemCategory
@@ -690,7 +795,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId                 Item id detials.
  *  @param uniqueRecommendationId Unique recommendation identifier.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromRecommendations:(NSString *) cartId
                       withItemCategory:(NSString *) itemCategory
@@ -706,7 +813,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId          Item id details.
  *  @param previousOrderId Previous order identifier.
  *  @param attributes      Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromPreviousOrders:(NSString *) cartId
                      withItemCategory:(NSString *) itemCategory
@@ -722,7 +831,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId       Item id details.
  *  @param searchString Search string.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromSearchResults:(NSString *) cartId
                     withItemCategory:(NSString *) itemCategory
@@ -738,7 +849,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemId       Item id details.
  *  @param uniqueDealId Unique deal identifier.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAddItemFromSubcriptionList:(NSString *) cartId
                       withItemCategory:(NSString *) itemCategory
@@ -753,7 +866,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param itemCategory Item category identifier.
  *  @param itemId       Item id details.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRemoveItemFromCart:(NSString *) cartId
               withItemCategory:(NSString *) itemCategory
@@ -765,7 +880,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *
  *  @param cartId     Cart
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postView:(NSString *) cartId
   withAttributes:(NSDictionary *)attributes;
@@ -777,7 +894,9 @@ withUniqueRegionIdentifier:(NSString *)uniqueRegionIdentifier
  *  @param sharedWith Shared with details FB/Twitter/G+ etc.
  *  @param itemId     Item id details.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postShare:(NSString *) cartId
 withItemSharedWith:(NSString *) sharedWith
@@ -790,7 +909,9 @@ withItemSharedWith:(NSString *) sharedWith
 /**
  *  ### PyzeCommerceItem
  *  Subclass of PyzeCustomEvent class used post details of the events related to Item.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeCommerceItem : PyzeCustomEvent
@@ -802,7 +923,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post detials of the item viewed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postViewedItem:(NSDictionary *) attributes;
 
@@ -810,7 +933,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post detials of the item scanned details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 
 +(void) postScannedItem:(NSDictionary *) attributes;
@@ -820,7 +945,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post detials of the item viewed reviews details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postViewedReviews:(NSDictionary *) attributes;
 
@@ -829,7 +956,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post detials of the item viewed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postViewedDetails:(NSDictionary *) attributes;
 
@@ -838,7 +967,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post detials of the item viewed price details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postViewedPrice:(NSDictionary *) attributes;
 
@@ -847,7 +978,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post detials of the item shared details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postItemShareItem:(NSDictionary *) attributes;
 
@@ -858,7 +991,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param itemSKU    Item SKU identifier.
  *  @param rating     Rating number out of 5/10.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postItemRateOn5Scale:(NSString *) itemSKU withRating:(NSString *) rating withAttributes:(NSDictionary *)attributes;
 
@@ -867,7 +1002,9 @@ withItemSharedWith:(NSString *) sharedWith
 /**
  *  ### PyzeCommerceCheckout
  *  Subclass of PyzeCustomEvent class used post details of the events related to Item checkout.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceCheckout : PyzeCustomEvent
 
@@ -878,7 +1015,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post checkout started details of the item.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postCheckoutStarted:(NSDictionary *) attributes;
 
@@ -886,7 +1025,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post checkout completion details of the item.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postCheckoutCompleted:(NSDictionary *) attributes;
 
@@ -894,7 +1035,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post checkout abondonment details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postCheckoutAbandoned:(NSDictionary *) attributes;
 
@@ -902,7 +1045,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post checkpit failed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postCheckoutFailed:(NSDictionary *) attributes;
 
@@ -911,7 +1056,9 @@ withItemSharedWith:(NSString *) sharedWith
 /**
  *  ### PyzeCommerceShipping
  *  Subclass of PyzeCustomEvent class used post details of the events related to Item shipping.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeCommerceShipping : PyzeCustomEvent
@@ -923,7 +1070,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post shipping started details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postShippingStarted:(NSDictionary *) attributes;
 
@@ -931,7 +1080,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post shipping completed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postShippingCompleted:(NSDictionary *) attributes;
 
@@ -939,7 +1090,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post shipping abandonment details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postShippingAbandoned:(NSDictionary *) attributes;
 
@@ -947,7 +1100,11 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post shipping failed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
+ *  @since v1.0.0
+ 
  */
 +(void) postShippingFailed:(NSDictionary *) attributes;
 
@@ -956,7 +1113,9 @@ withItemSharedWith:(NSString *) sharedWith
 /**
  *  ### PyzeCommerceBilling
  *  Subclass of PyzeCustomEvent class used post details of the events related to Item billing.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeCommerceBilling : PyzeCustomEvent
@@ -968,7 +1127,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post billing started details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 
 +(void) postBillingStarted:(NSDictionary *) attributes;
@@ -977,7 +1138,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post billing completed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBillingCompleted:(NSDictionary *) attributes;
 
@@ -985,7 +1148,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post billing abandonment details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBillingAbandoned:(NSDictionary *) attributes;
 
@@ -993,7 +1158,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post billing failed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBillingFailed:(NSDictionary *) attributes;
 
@@ -1002,7 +1169,9 @@ withItemSharedWith:(NSString *) sharedWith
 /**
  *  ### PyzeCommercePayment
  *  Subclass of PyzeCustomEvent class used post details of the events related to Item payment.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeCommercePayment : PyzeCustomEvent
@@ -1014,7 +1183,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post payment started details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPaymentStarted:(NSDictionary *) attributes;
 
@@ -1022,7 +1193,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post payment completed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPaymentCompleted:(NSDictionary *) attributes;
 
@@ -1030,7 +1203,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post payment abandonment details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPaymentAbandoned:(NSDictionary *) attributes;
 
@@ -1038,7 +1213,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post payment failed details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPaymentFailed:(NSDictionary *) attributes;
 
@@ -1047,7 +1224,9 @@ withItemSharedWith:(NSString *) sharedWith
 /**
  *  ### PyzeCommerceRevenue
  *  Subclass of PyzeCustomEvent class used post details of the events related to Revenue.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeCommerceRevenue : PyzeCustomEvent
 
@@ -1059,7 +1238,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param revenue    Revenue value.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRevenue:(NSNumber*) revenue withAttributes:(NSDictionary*) attributes;
 
@@ -1068,7 +1249,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param revenue    Revenue value.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRevenueUsingApplePay:(NSNumber*) revenue withAttributes:(NSDictionary*) attributes;
 
@@ -1077,7 +1260,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param revenue    Revenue value.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRevenueUsingSamsungPay:(NSNumber*) revenue withAttributes:(NSDictionary*) attributes;
 
@@ -1086,7 +1271,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param revenue    Revenue value
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRevenueUsingGooglePay:(NSNumber*) revenue withAttributes:(NSDictionary*) attributes;
 
@@ -1096,19 +1283,23 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param revenue           Revenue value.
  *  @param paymentInstrument Payment instrument used.
  *  @param attributes        Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRevenue:(NSNumber*) revenue withPaymentInstrument: (NSString*) paymentInstrument withAttributes:(NSDictionary*) attributes;
 @end
 
 
 
-#pragma mark - Mobile Gaming
+#pragma mark - Pyze Mobile Gaming
 
 /**
  *  ### PyzeGaming
  *  Subclass of PyzeCustomEvent class used post details of the events related to Gaming.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeGaming : PyzeCustomEvent
 
@@ -1120,7 +1311,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param level      Level started number.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postLevelStarted:(NSString *) level
           withAttributes:(NSDictionary *)attributes;
@@ -1132,10 +1325,12 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param score      Current score at the level.
  *  @param success    Success or failure reason.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postLevelEnded:(NSString *) level
-            withScore:(NSString *) score
+             withScore:(NSString *) score
   withSuccessOrFailure:(NSString *) success
         withAttributes:(NSDictionary*) attributes;
 
@@ -1146,7 +1341,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param type       Type of Power-up used.
  *  @param value      Value for the power-up
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPowerUpConsumed:(NSString *) level
                    withType:(NSString *) type
@@ -1160,7 +1357,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param itemType     Item type details
  *  @param value        Value of the item.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postInGameItemPurchased:(NSString *) uniqueItemId
                    withItemType:(NSString *) itemType
@@ -1173,7 +1372,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param uniqueAchievementId Achievement identifier.
  *  @param type                Type of achievement.
  *  @param attributes          Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAchievementEarned:(NSString *) uniqueAchievementId
                      withType:(NSString *) type
@@ -1185,7 +1386,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param level      Level number.
  *  @param score      Score at the level.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postSummaryViewed:(NSString*) level
                 withScore:(NSString *) score
@@ -1197,7 +1400,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param level Level number.
  *  @param score Score at the level.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postLeaderBoardViewed:(NSString*) level
                     withScore:(NSString *) score
@@ -1209,7 +1414,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param level      Level number
  *  @param score      Score at the level
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postScorecardViewed:(NSString*) level
                   withScore:(NSString *) score
@@ -1220,7 +1427,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param helpTopicId Help Topic identifier used.
  *  @param dictionary  Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postHelpViewed:(NSString *) helpTopicId
         withAttributes:(NSDictionary *) dictionary;
@@ -1230,7 +1439,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param helpTopicId Help topic identifier used.
  *  @param dictionary  Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postTutorialViewed:(NSString *) helpTopicId
             withAttributes:(NSDictionary *) dictionary;
@@ -1239,7 +1450,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of the challenging a friend.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postFriendChallenged:(NSDictionary *) attributes;
 
@@ -1247,7 +1460,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of the accepted challenge from friend.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postChallengeAccepted:(NSDictionary *) attributes;
 
@@ -1255,7 +1470,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post declined challenge request.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postChallengeDeclined:(NSDictionary *) attributes;
 
@@ -1264,7 +1481,9 @@ withItemSharedWith:(NSString *) sharedWith
  *
  *  @param level      Level number
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postGameStart:(NSString *) level
        withAttributes:(NSDictionary *)attributes;
@@ -1275,7 +1494,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param levelsPlayed Level played at the current session
  *  @param levelsWon    Levels actually won/completed.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postGameEnd:(NSString *) levelsPlayed
       withLevelsWon:(NSString *) levelsWon
@@ -1283,12 +1504,14 @@ withItemSharedWith:(NSString *) sharedWith
 
 @end
 
-#pragma mark - Mobile Health and Fitness class
+#pragma mark - Pyze Mobile Health and Fitness class
 
 /**
  *  ### PyzeHealthAndFitness
  *  Subclass of PyzeCustomEvent class used post details of the events related to Health and Fitness.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeHealthAndFitness : PyzeCustomEvent
@@ -1300,7 +1523,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine start.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postStarted:(NSDictionary *) attributes;
 
@@ -1308,7 +1533,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine ended.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postEnded:(NSDictionary *) attributes;
 
@@ -1316,7 +1543,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine achievement.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postAchievementReceived:(NSDictionary *) attributes;
 
@@ -1324,7 +1553,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine step-goal completion.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postStepGoalCompleted:(NSDictionary *) attributes;
 
@@ -1332,7 +1563,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine goal completion.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postGoalCompleted:(NSDictionary *) attributes;
 
@@ -1340,7 +1573,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine friend challenge.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postChallengedFriend:(NSDictionary *) attributes;
 
@@ -1348,18 +1583,22 @@ withItemSharedWith:(NSString *) sharedWith
  *  Post details of health and fitness routine friend challenge acceptance.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postChallengeAccepted:(NSDictionary *) attributes;
 
 @end
 
-#pragma mark - Pyze Content
+#pragma mark - Pyze Content, Messaging, Tasks and Social
 
 /**
  *  ### PyzeContent
  *  Subclass of PyzeCustomEvent class used post details of the events related to Content.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeContent : PyzeCustomEvent
@@ -1374,7 +1613,9 @@ withItemSharedWith:(NSString *) sharedWith
  *  @param categoryName Category of the content.
  *  @param contentId    Content identifier.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postViewed:(NSString *) contentName
           category:(NSString *) categoryName
@@ -1386,7 +1627,9 @@ withUniqueContentId:(NSString *) contentId
  *
  *  @param searchString Search string
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postSearched:(NSString *) searchString withAttributes:(NSDictionary *)attributes;
 
@@ -1398,7 +1641,9 @@ withUniqueContentId:(NSString *) contentId
  *  @param contentId    Content identifier.
  *  @param rating       Rating value.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRatedOn5PointScale:(NSString *) contentName
                       category:(NSString *) categoryName
@@ -1413,7 +1658,9 @@ withUniqueContentId:(NSString *) contentId
  *  @param categoryName Category of the content.
  *  @param contentId    Content id details.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRatedThumbsUp:(NSString *) contentName
                  category:(NSString *) categoryName
@@ -1427,7 +1674,9 @@ withUniqueContentId:(NSString *) contentId
  *  @param categoryName Category of the content.
  *  @param contentId    Content id details.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRatedThumbsDown:(NSString *) contentName
                    category:(NSString *) categoryName
@@ -1439,7 +1688,9 @@ withUniqueContentId:(NSString *) contentId
 /**
  *  ### PyzeMessaging
  *  Subclass of PyzeCustomEvent class used post details of the events related to Messaging.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeMessaging : PyzeCustomEvent
@@ -1452,7 +1703,9 @@ withUniqueContentId:(NSString *) contentId
  *
  *  @param uniqueId   SMS identifier.
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postMessageSMS:(NSString *) uniqueId withAttributes:(NSDictionary *) dictionary;
 
@@ -1461,7 +1714,9 @@ withUniqueContentId:(NSString *) contentId
  *
  *  @param uniqueId   SMS identifier.
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postMessageSent:(NSString *) uniqueId withAttributes:(NSDictionary *) dictionary;
 
@@ -1470,7 +1725,9 @@ withUniqueContentId:(NSString *) contentId
  *
  *  @param uniqueId   SMS identifier
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postMessageReceived:(NSString *) uniqueId withAttributes:(NSDictionary *) dictionary;
 
@@ -1479,7 +1736,9 @@ withUniqueContentId:(NSString *) contentId
  *
  *  @param uniqueId   Conversation identifier.
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postMessageNewConversation:(NSString *) uniqueId withAttributes:(NSDictionary *) dictionary;
 
@@ -1488,7 +1747,9 @@ withUniqueContentId:(NSString *) contentId
  *
  *  @param uniqueId   Call identifier.
  *  @param dictionary Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postMessageVoiceCall:(NSString *) uniqueId withAttributes:(NSDictionary *) dictionary;
 
@@ -1498,7 +1759,9 @@ withUniqueContentId:(NSString *) contentId
 /**
  *  ### PyzeTasks
  *  Subclass of PyzeCustomEvent class used post details of the events related to Tasks.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeTasks: PyzeCustomEvent
 
@@ -1508,7 +1771,9 @@ withUniqueContentId:(NSString *) contentId
  *  Add the current task to the calendar.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void)  addToCalendarwithAttributes:(NSDictionary *)attributes;
 
@@ -1518,7 +1783,9 @@ withUniqueContentId:(NSString *) contentId
 /**
  *  ### PyzeSocial
  *  Subclass of PyzeCustomEvent class used post details of the events related to Social media.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeSocial: PyzeCustomEvent
 
@@ -1532,7 +1799,9 @@ withUniqueContentId:(NSString *) contentId
  *  @param contentReference  Content reference URL string shared.
  *  @param category          Category of the content.
  *  @param dictionary        Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postSocialContentShareForNetworkName:(NSString *) socialNetworkName
                          forContentReference:(NSString *) contentReference
@@ -1546,7 +1815,9 @@ withUniqueContentId:(NSString *) contentId
  *  @param contentReference  Content reference URL shared.
  *  @param category          Catefory of the content.
  *  @param dictionary        Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postLiked:(NSString *) socialNetworkName
 forContentReference:(NSString *) contentReference
@@ -1560,7 +1831,9 @@ forContentReference:(NSString *) contentReference
  *  @param contentReference  Content reference.
  *  @param category          Category identifier of the Content.
  *  @param dictionary        Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postFollowed:(NSString *) socialNetworkName
  forContentReference:(NSString *) contentReference
@@ -1574,19 +1847,23 @@ forContentReference:(NSString *) contentReference
  *  @param contentReference  Content reference.
  *  @param category          Category identifier of the content.
  *  @param dictionary        Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postSubscribed:(NSString *) socialNetworkName
-  forContentReference:(NSString *) contentReference
-             category:(NSString *) category
-       withAttributes:(NSDictionary *) dictionary;
+   forContentReference:(NSString *) contentReference
+              category:(NSString *) category
+        withAttributes:(NSDictionary *) dictionary;
 
 /**
  *  Post details of friend invite.
  *
  *  @param socialNetworkName Social network name FB/t/G+
  *  @param attributes        Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postInvitedFriend: (NSString *) socialNetworkName withAttributes:(NSDictionary *)attributes;
 
@@ -1595,19 +1872,23 @@ forContentReference:(NSString *) contentReference
  *
  *  @param source     Source where content searched.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postFoundFriends:(NSString *) source withAtrributes:(NSDictionary *) attributes;
 
 
 @end
 
-#pragma mark - Media Class - Video, Audio, Pictures etc.
+#pragma mark - Pyze Media: Video, Audio, Pictures etc.
 
 /**
  *  ### PyzeMedia
  *  Subclass of PyzeCustomEvent class used post details of the events related to Media.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface PyzeMedia : PyzeCustomEvent
@@ -1624,7 +1905,9 @@ forContentReference:(NSString *) contentReference
  *  @param percent      Percentage of content played.
  *  @param contentId    Content identifier.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPlayedMedia:(NSString *) contentName
               mediaType:(NSString *) type
@@ -1638,7 +1921,9 @@ forContentReference:(NSString *) contentReference
  *
  *  @param searchString Search string.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postSearched:(NSString *) searchString withAttributes:(NSDictionary *)attributes;
 
@@ -1650,11 +1935,13 @@ forContentReference:(NSString *) contentReference
  *  @param mediaId      Media identifier.
  *  @param rating       Rating value.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRatedOn5PointScale:(NSString *) contentName
                       category:(NSString *) categoryName
-             withUniqueContentId:(NSString *) mediaId
+           withUniqueContentId:(NSString *) mediaId
                  contentRating:(NSDecimalNumber *) rating
                 withAttributes:(NSDictionary *)attributes;
 
@@ -1665,7 +1952,9 @@ forContentReference:(NSString *) contentReference
  *  @param categoryName Content category name.
  *  @param contentId    Content identifier.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRatedThumbsUp:(NSString *) contentName
                  category:(NSString *) categoryName
@@ -1679,7 +1968,9 @@ forContentReference:(NSString *) contentReference
  *  @param categoryName Content category name.
  *  @param contentId    Content identifier.
  *  @param attributes   Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRatedThumbsDown:(NSString *) contentName
                    category:(NSString *) categoryName
@@ -1688,12 +1979,14 @@ forContentReference:(NSString *) contentReference
 
 @end
 
-#pragma mark - In-App Purchase and Bitcoin Classes
+#pragma mark - Pyze In-App Purchases and Bitcoin
 
 /**
  *  ### PyzeInAppPurchaseRevenue
  *  Subclass of PyzeCustomEvent class used post details of the events related to In-App purchase.
+ 
  *  @since v1.0.0
+ 
  */
 
 @interface  PyzeInAppPurchaseRevenue : PyzeCustomEvent
@@ -1706,7 +1999,9 @@ forContentReference:(NSString *) contentReference
  *
  *  @param appScreenRequestFromId App screen requested identifier.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postPriceListViewViewed:(NSString *) appScreenRequestFromId withAttributes:(NSDictionary *) attributes;
 
@@ -1717,7 +2012,9 @@ forContentReference:(NSString *) contentReference
  *  @param revenue             Revenue value.
  *  @param currencyISO4217Code Currency code $ or Rs.
  *  @param attributes          Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBuyItem:(NSString *) itemName
               price:(NSDecimalNumber *) revenue
@@ -1730,7 +2027,9 @@ forContentReference:(NSString *) contentReference
  *  @param itemName   Item name.
  *  @param revenue    Revenue value.
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBuyItemInUSD:(NSString *) itemName
                    price:(NSDecimalNumber *) revenue
@@ -1749,7 +2048,9 @@ forContentReference:(NSString *) contentReference
  *  @param success                Success or failure.
  *  @param successOrErrorCode     Error code on fail.
  *  @param attributes             Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postBuyItem:(NSString *) itemName
               price:(NSDecimalNumber *) revenue
@@ -1767,7 +2068,9 @@ forContentReference:(NSString *) contentReference
 /**
  *  ### PyzeBitcoin
  *  Subclass of PyzeCustomEvent class used post details of the events related to Bitcoins.
+ 
  *  @since v1.0.0
+ 
  */
 @interface PyzeBitcoin : PyzeCustomEvent
 
@@ -1778,7 +2081,9 @@ forContentReference:(NSString *) contentReference
  *  Post sent bitcoin details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postSentBitcoins:(NSDictionary *) attributes;
 
@@ -1786,7 +2091,9 @@ forContentReference:(NSString *) contentReference
  *  Post requested bitcoin details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postRequestedBitcoins:(NSDictionary *) attributes;
 
@@ -1794,7 +2101,9 @@ forContentReference:(NSString *) contentReference
  *  Post received bitcoin details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postReceivedBitcoins:(NSDictionary *) attributes;
 
@@ -1802,7 +2111,9 @@ forContentReference:(NSString *) contentReference
  *  Post viewed transaction details.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postViewedTransactions:(NSDictionary *) attributes;
 
@@ -1810,7 +2121,9 @@ forContentReference:(NSString *) contentReference
  *  Post imported private key details of bitcoin.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postImportedPrivateKey:(NSDictionary *) attributes;
 
@@ -1818,7 +2131,9 @@ forContentReference:(NSString *) contentReference
  *  Post scanned private key details of bitcoin.
  *
  *  @param attributes Additional custom attributes app would like to share with server.
+ 
  *  @since v1.0.0
+ 
  */
 +(void) postScannedPrivateKey:(NSDictionary *) attributes;
 
