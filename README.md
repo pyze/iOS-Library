@@ -10,8 +10,6 @@ Visit **<a href="http://pyze.com/iOS.html">iOS Developer Center</a>** to learn m
 ###<a href="http://pyze.com/iOS.html">iOS Developer Center</a>
 
 iOS versions supported are 7.x, 8.x and 9.x.
+<a href="https://github.com/pyze/iOS-Library/wiki/iOS-Troubleshooting-Guide">iOS Troubleshooting Guide</a>
 
 <br>
-
-<img src="http://pyze.com/images/android.svg" height="20" />
-[The Android Library can be found here] (https://github.com/pyze/Android-Library)
