@@ -16,18 +16,34 @@ FOUNDATION_EXPORT double PyzeVersionNumber;
 typedef NS_ENUM(NSInteger, PyzeLogLevel) {
     /**
      *  Log Minimal
+     *
+     *  How to use:
+     *
+     *    [Pyze logThrottling:PyzelogLevelMinimal];
      */
     PyzelogLevelMinimal = 0,
     /**
      *  Log Mininmal + warnings
+     *
+     *  How to use:
+     *
+     *    [Pyze logThrottling:PyzelogLevelWarnings];
      */
     PyzelogLevelWarnings = 1,
     /**
      * Log Mininmal + warnings + errors
+     *
+     * How to use:
+     *
+     *    [Pyze logThrottling:PyzelogLevelErrors];
      */
     PyzelogLevelErrors = 2,
     /**
-     *  Log all messages
+     * Log all messages
+     *
+     * How to use:
+     *
+     *    [Pyze logThrottling:PyzelogLevelAll];
      */
     PyzelogLevelAll = 3
 };
@@ -41,7 +57,7 @@ typedef NS_ENUM(NSInteger, PyzeLogLevel) {
  * debugLogThrottling:
  * In the release mode or deployment the SDK will log minimally.
  * 
- * Documentation is here: [docs.pyze.com](http://docs,pyze.com)
+ * Documentation is here: [docs.pyze.com](http://docs.pyze.com)
  *
  * You will need an app-specific key "Pyze App Key" from: [growth.pyze.com](https://growth.pyze.com/)
  * 
@@ -49,15 +65,7 @@ typedef NS_ENUM(NSInteger, PyzeLogLevel) {
 @interface Pyze : NSObject
 
 
-/// @name Initialize Pyze Library
-
-/**
- *  Deprecated in favor of static initialize: method
- *
- *  @see +initialize:
- *
- */
-- (void) initializeWithKey:(NSString *) pyzeAppKey;
+/// @name Initializing Pyze
 
 /**
  *  Initializes the Pyze library. Call this method in the app delegate's method
@@ -75,16 +83,29 @@ typedef NS_ENUM(NSInteger, PyzeLogLevel) {
  */
 + (void) initialize:(NSString *) pyzeAppKey;
 
-
-/// @name Log Throttling
+/// @name  Timer Reference to use with timed custom events
 
 /**
- *  Deprecated in favor of static method logThrottling:
+ *  Pyze Timer Reference is a time interval since a Pyze internal reference time in seconds with millisecond precision e.g. 6.789 seconds (or 6789 milliseconds)
  *
- *  @see +logThrottling:
+ *  It is used to time tasks and report in events.
+ *
+ *  usage:
+ *
+ *     //Start timing
+ *     double referenceFileUploadStart = [Pyze timerReference];
+ *     ...
+ *     ...
+ *     //time and send elapsedSeconds
+ *     [PyzeCustomEvent postWithEventName:@“File Uploaded”
+ *                     withTimerReference:referenceFileUploadStart];
  *
  */
--(void) logThrottling:(PyzeLogLevel) logLevel;
++(double) timerReference;
+
+
+
+/// @name Throttling logs for troubleshooting
 
 /**
  *  Log throttling level to be used in the lib while target is in debug mode.
@@ -105,30 +126,24 @@ typedef NS_ENUM(NSInteger, PyzeLogLevel) {
 +(void) logThrottling:(PyzeLogLevel) logLevel;
 
 
-/// @name Pyze Timer Reference
+
+/// @name Marked for Deprecation
 
 /**
- *  Pyze Timer Reference is a time interval since a Pyze internal reference time in seconds with millisecond precision e.g. 6.789 seconds (or 6789 milliseconds)
+ *  Deprecated in favor of static initialize: method
  *
- *  It is used to time tasks and report in events.
- *
- *  usage:
- *
- *     //Start timing
- *     double referenceFileUploadStart = [Pyze timerReference];
- *     ...
- *     ...
- *     //time and send elapsedSeconds
- *     [PyzeCustomEvent postWithEventName:@“File Uploaded” 
- *                     withTimerReference:referenceFileUploadStart];
+ *  @see +initialize:
  *
  */
-+(double) timerReference;
+- (void) initializeWithKey:(NSString *) pyzeAppKey;
 
-
-
-
-/// @name Shared Pyze Instance
+/**
+ *  Deprecated in favor of static method logThrottling:
+ *
+ *  @see +logThrottling:
+ *
+ */
+-(void) logThrottling:(PyzeLogLevel) logLevel;
 
 /**
  *  Get the shared instance of Pyze API

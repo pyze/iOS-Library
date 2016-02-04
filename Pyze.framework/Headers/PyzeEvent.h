@@ -9,7 +9,7 @@
  */
 @interface PyzeCustomEvent : NSObject
 
-/// @name Class Methods
+/// @name Custom Event class methods
 
 /**
  *  Base class method which will post the data to server.
@@ -32,6 +32,8 @@
  *
  */
 +(void) postWithEventName:(nonnull NSString *) eventName;
+
+#pragma mark - Timed Custom Event class methods
 
 /**
  *  Base class method which will post the data to server.
@@ -2625,7 +2627,7 @@ forContentReference:(NSString *) contentReference
 
 
 
-#pragma mark - Weather and Forecast class
+#pragma mark - Pyze Weather and Forecast tracking
 
 //http://openweathermap.org/api
 /**
