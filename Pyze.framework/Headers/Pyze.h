@@ -48,6 +48,46 @@ typedef NS_ENUM(NSInteger, PyzeLogLevel) {
     PyzelogLevelAll = 3
 };
 
+/**
+ *  PyzeAspectRatio
+ *
+ *  It will be used to display InApp Messages screen based on the aspect ratio of the screen on which In App messages will be presented.
+ */
+typedef NS_ENUM(NSInteger, PyzeAspectRatio) {
+    /**
+     *  Full size screen. InApp Messages screen will cover the screen on which In App messages will be presented.
+     */
+    PyzeAspectRatioFullSize,
+    /**
+     *  3/4 of the screen. InApp Messages screen will cover 75% of the screen on which In App messages will be presented.
+     */
+    PyzeAspectRatioThreeQuarterSize,
+    /**
+     *  1/2 of the screen. InApp Messages screen will cover 50% of the screen on which In App messages will be presented.
+     */
+    PyzeAspectRatioHalfSize
+};
+
+/**
+ *  PyzeMessageDisplayType
+ *
+ *  This enum will be used to display New InApp messages [Unread messages] or Previous messages [Read messages] or both using segmented control
+ *
+ */
+typedef NS_ENUM(NSInteger, PyzeMessageDisplayType) {
+    /**
+     *  New InApp messages [Unread messages]
+     */
+    PyzeMessageDisplayTypeNew,
+    /**
+     *  Previous messages [Read messages]
+     */
+    PyzeMessageDisplayTypePrevious,
+    /**
+     *  New InApp messages [Unread messages] & Previous messages [Read messages]
+     */
+    PyzeMessageDisplayTypeBoth
+};
 
 #pragma mark - Pyze
 /**
@@ -164,5 +204,57 @@ typedef NS_ENUM(NSInteger, PyzeLogLevel) {
 -(instancetype) init NS_UNAVAILABLE;
 
 
+/**
+ *  This will show the In App messages with UI by calling getUnreadMessageCount, getUnreadMessageMetadata and getMessageWithMid:andWithCid:withCompletionHandler: methods
+ *
+ *  @param onViewControlller  Root view controller to which UI message to be displayed.
+ *  @param title              Title for the in-app message screen.
+ *  @param ratio              Aspect ratio of the in-app message screen with respect to the root view controller.
+ *  @param displayMessageType Display message type of in-app message which are Unread/Read and both.
+ *
+ *  @since 2.2.0
+ */
++(void) showInAppNotificationScreenOnViewController:(UIViewController *) onViewControlller
+                                     viewControllerTitle:(NSString *) title
+                                          forHeightRatio:(PyzeAspectRatio) ratio
+                                      forDisplayMessages:(PyzeMessageDisplayType) displayMessageType;
+
+/**
+ *  Returns the unread messages of the in-app service.
+ *
+ *  @param completionHandler Completion handler with result.
+ *
+ *  @since 2.2.0
+ */
++(void) getUnreadMessageCount:(void (^)(id result)) completionHandler;
+
+/**
+ *  Returns the unread message metadata of the in-app service.
+ *
+ *  @param completionHandler Completion handler with result.
+ *
+ *  @since 2.2.0
+ */
++(void) getUnreadMessageMetadata:(void (^)(id result)) completionHandler;;
+
+/**
+ *  Returns the message from mid [message ID] and cid [campaign ID] received from the unread message metadata.
+ *
+ *  @param mid               message ID.
+ *  @param cid               Campaign ID.
+ *  @param completionHandler Completion handler with result.
+ *
+ *  @since 2.2.0
+ */
++(void) getMessageWithMid:(NSString *) mid andWithCid:(NSString *) cid withCompletionHandler:(void (^)(id result)) completionHandler;
+
+/**
+ *  Returns the previous read messages.
+ *
+ *  @return Contains array of metadata of messages.
+ *
+ *  @since 2.2.0
+ */
++(NSArray *) previousReadMessages;
 
 @end
