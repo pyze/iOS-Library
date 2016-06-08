@@ -411,7 +411,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(void) postAdRequested:(nullable NSString *)adNetwork
           fromAppScreen:(nonnull NSString *)appScreen
-             withAdSize:(CGSize)size
+             withAdSize:(NSString *)size
                  adType:(nonnull NSString *) type
          withAttributes:(nullable NSDictionary *)attributes;
 

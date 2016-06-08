@@ -69,27 +69,30 @@ typedef NS_ENUM(NSInteger, PyzeAspectRatio) {
 };
 
 /**
- *  PyzeMessageDisplayType
+ *  PyzeInAppMessageType
  *
- *  This enum will be used to display New InApp messages [Unread messages] or Previous messages [Read messages] or both using segmented control
+ *  This enum will be used to display New InApp messages [Unread messages] or Previous messages [Read messages] or both.
  *
  */
-typedef NS_ENUM(NSInteger, PyzeMessageDisplayType) {
+typedef NS_ENUM(NSInteger, PyzeInAppMessageType) {
     /**
-     *  New InApp messages [Unread messages]
+     *  New InApp messages [Unread messages including unfetched]
      */
-    PyzeMessageDisplayTypeNew,
+    PyzeInAppTypeUnread,
     /**
      *  Previous messages [Read messages]
      */
-    PyzeMessageDisplayTypePrevious,
+    PyzeInAppTypeRead,
     /**
      *  New InApp messages [Unread messages] & Previous messages [Read messages]
      */
-    PyzeMessageDisplayTypeBoth
+    PyzeInAppTypeAll
 };
 
 #pragma mark - Pyze
+
+@protocol PyzeInAppMessageHandlerDelegate;
+
 /**
  * Pyze main class
  * 
@@ -228,58 +231,109 @@ typedef NS_ENUM(NSInteger, PyzeMessageDisplayType) {
  */
 -(instancetype) init NS_UNAVAILABLE;
 
+/**
+ *  Show in-app message with default settings. For all the controls presented including 'MessageNavigationBar', buttons 
+ *  will loaded with default presentation colors used by the SDK.
+ *
+ *  @param onViewController The controller on which the in-app should be presented.
+ */
++(void) showInAppNotificationScreenOnViewControllerWithDefaults:(UIViewController *) onViewController;
+
 
 /**
- *  This will show the In App messages with UI by calling getUnreadMessageCount, getUnreadMessageMetadata and getMessageWithMid:andWithCid:withCompletionHandler: methods
+ *  Convenience method to show in-app message with custom colors as required by the app.
  *
- *  @param onViewControlller  Root view controller to which UI message to be displayed.
- *  @param title              Title for the in-app message screen.
- *  @param ratio              Aspect ratio of the in-app message screen with respect to the root view controller.
- *  @param displayMessageType Display message type of in-app message which are Unread/Read and both.
+ *  @param onViewController       The controller on which the in-app should be presented.
+ *  @param messageType             The in-app message type you would want to see. Default is PyzeInAppTypeAll.
+ *  @param buttonTextcolor         Button text color.
+ *  @param buttonBackgroundColor   Button background color
+ *  @param backgroundColor         background color of the 'MessageNavigationBar'
+ *  @param messageCounterTextColor Message counter text color (Ex: Showing 1/10 in-app messages).
+ *  @param delegate                Delegate if your app would want to handle when user taps on one of the presented buttons.
  *
- *  @since 2.2.0
- */
-+(void) showInAppNotificationScreenOnViewController:(UIViewController *) onViewControlller
-                                     viewControllerTitle:(NSString *) title
-                                          forHeightRatio:(PyzeAspectRatio) ratio
-                                      forDisplayMessages:(PyzeMessageDisplayType) displayMessageType;
+ *  @since 2.3.0
+*/
++(void) showInAppNotificationScreenOnViewController:(UIViewController *) onViewController
+                                 forDisplayMessages:(PyzeInAppMessageType) messageType
+      foregroundColorForMessageNavigationBarButtons:(UIColor *) buttonTextcolor
+      backgroundColorForMessageNavigationBarButtons:(UIColor *) buttonBackgroundColor
+ withTransulcentMessageNavigationBarBackgroundColor:(UIColor *) backgroundColor
+   withColorForMessageCounterOfMessageNavigationBar:(UIColor *) messageCounterTextColor
+                                       withDelegate:(id<PyzeInAppMessageHandlerDelegate>) delegate;
+
 
 /**
- *  Returns the unread messages of the in-app service.
+ *  Returns the number of unread messages from the server.
  *
- *  @param completionHandler Completion handler with result.
+ *  @param completionHandler Completion handler will be called with count.
  *
- *  @since 2.2.0
+ *  @since 2.3.0
  */
-+(void) getUnreadMessageCount:(void (^)(id result)) completionHandler;
++(void) countNewUnFetched:(void (^)(id result)) completionHandler;
 
 /**
- *  Returns the unread message metadata of the in-app service.
+ *  Get message headers containing message ID and content ID.
  *
- *  @param completionHandler Completion handler with result.
+ *  @param messageType       Message type for in-app messages.
+ *  @param completionHandler Completion handler will be called with result.
  *
- *  @since 2.2.0
+ *  @since 2.3.0
  */
-+(void) getUnreadMessageMetadata:(void (^)(id result)) completionHandler;;
++(void) getMessageHeadersForType:(PyzeInAppMessageType) messageType withCompletionHandler:(void (^)(id result)) completionHandler;
 
 /**
- *  Returns the message from mid [message ID] and cid [campaign ID] received from the unread message metadata.
+ *  Get message details with Content ID and messageID received from 'getMessageHeadersForType'.
  *
- *  @param mid               message ID.
- *  @param cid               Campaign ID.
- *  @param completionHandler Completion handler with result.
+ *  @param contentID         content ID
+ *  @param messageID         message ID
+ *  @param completionHandler Completion handler will be called with result.
  *
- *  @since 2.2.0
+ *  @since 2.3.0
  */
-+(void) getMessageWithMid:(NSString *) mid andWithCid:(NSString *) cid withCompletionHandler:(void (^)(id result)) completionHandler;
++(void) getMessageWithContentID:(NSString *) contentID andMessageID:(NSString *) messageID withCompletionHandler:(void (^)(id result)) completionHandler;
+
+@end
 
 /**
- *  Returns the previous read messages.
+ *  Pyze deep link status enumeration, useful to determine whether deeplink provided, successful or failed.
  *
- *  @return Contains array of metadata of messages.
- *
- *  @since 2.2.0
+ *  @since 2.3.0
  */
-+(NSArray *) previousReadMessages;
+typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
+    /**
+     *  Deeplink not provided while creating the in-app
+     */
+    PyzeDeepLinkNotProvided = 0,
+    /**
+     *  Deeplink successfully called. For Example: (http://pyze.com or yelp://search?term=burritos where yelp application is installed on the device)
+     */
+    PyzeDeepLinkCallSuccessful,
+    /**
+     *  Invalid or deeplink not found. For Example: (mispelt htp://pyze.com or yelp://search?term=burritos where yelp application is not installed on the device)
+     */
+    PyzeDeepLinkCallFailed
+};
 
+/**
+ *  Pyze In app message handler delegate. This has one optional call to action method which will inform your class when user clicks on one of the in-app messsage buttons.
+ *
+ *  @since 2.3.0
+*/
+@protocol PyzeInAppMessageHandlerDelegate <NSObject>
+
+@optional
+
+/**
+ *  Call to action delegate method for in-app message buttons
+ *
+ *  @param buttonID Button index id
+ *  @param title    Title provided for the button
+ *  @param urlInfo  deeplink url info provided.
+ *  @param status   Pyze deep link status.
+ *
+ *  @since 2.3.0
+*/
+-(void) didUserClickedOnInAppMessageButtonWithID:(NSInteger) buttonID
+                                     buttonTitle:(NSString *) title
+                               containingURLInfo:(id) urlInfo withDeepLinkStatus:(PyzeDeepLinkStatus) status;
 @end
