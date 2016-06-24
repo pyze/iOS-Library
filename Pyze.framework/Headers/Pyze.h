@@ -225,7 +225,6 @@ typedef NS_ENUM(NSInteger, PyzeInAppMessageType) {
 +(void) addBadge:(UIControl *) control;
 
 /**
-<<<<<<< HEAD
  *  Show in-app message with default settings. For all the controls presented including  Message Navigation Bar, buttons
  *  will loaded with default presentation colors used by the SDK.
  *
@@ -235,17 +234,6 @@ typedef NS_ENUM(NSInteger, PyzeInAppMessageType) {
  - Since: 2.3.0
  */
 +(void) showUnreadInAppNotificationUI:(UIViewController *) onViewController
-=======
- *  Show in-app message with default settings. For all the controls presented including 'MessageNavigationBar', buttons 
- *  will loaded with default presentation colors used by the SDK.
- *
- *  @param onViewController The controller on which the in-app should be presented.
- *  @param delegate                Delegate if your app would want to handle when user taps on one of the presented buttons.
- 
- - Since: 2.3.0
- */
-+(void) showInAppNotificationUI:(UIViewController *) onViewController
->>>>>>> 7416a507a77f0e5e28e146e6c9b88828d0396717
                    withDelegate:(id<PyzeInAppMessageHandlerDelegate>) delegate;
 
 
@@ -253,19 +241,11 @@ typedef NS_ENUM(NSInteger, PyzeInAppMessageType) {
  *  Convenience method to show in-app message with custom colors as required by the app.
  *
  *  @param onViewController        The controller on which the in-app should be presented.
-<<<<<<< HEAD
  *  @param messageType             The in-app message type you would want to see. Default is PyzeInAppTypeUnread.
  *  @param buttonTextcolor         Button text color.
  *  @param buttonBackgroundColor   Button background color
  *  @param backgroundColor         Translucent background color of the 'MessageNavigationBar'
  *  @param messageCounterTextColor Message counter text color (Ex: 1 of 10 in-app messages).
-=======
- *  @param messageType             The in-app message type you would want to see. Default is PyzeInAppTypeAll.
- *  @param buttonTextcolor         Button text color.
- *  @param buttonBackgroundColor   Button background color
- *  @param backgroundColor         Translucent background color of the 'MessageNavigationBar'
- *  @param messageCounterTextColor Message counter text color (Ex: Showing 1/10 in-app messages).
->>>>>>> 7416a507a77f0e5e28e146e6c9b88828d0396717
  *  @param delegate                Delegate if your app would want to handle when user taps on one of the presented buttons.
  *
  *  - Since: 2.3.0
@@ -303,7 +283,6 @@ typedef NS_ENUM(NSInteger, PyzeInAppMessageType) {
            withCompletionHandler:(void (^)(NSArray * messageHeaders)) completionHandler;
 
 /**
-<<<<<<< HEAD
  *  Get message details with Campaign ID and message ID received from 'getMessageHeadersForType'.
  *
  *  @param cid                  campaign ID
@@ -315,19 +294,6 @@ typedef NS_ENUM(NSInteger, PyzeInAppMessageType) {
 +(void) getMessageBodyWithCampaignID:(NSString *) cid
                         andMessageID:(NSString *) messageID
                withCompletionHandler:(void (^)(NSDictionary * messageBody)) completionHandler;
-=======
- *  Get message details with Content ID and messageID received from 'getMessageHeadersForType'.
- *
- *  @param contentID         content ID
- *  @param messageID         message ID
- *  @param completionHandler Completion handler will be called with message body.
- *
- *  - Since: 2.3.0
- */
-+(void) getMessageWithContentID:(NSString *) contentID
-                   andMessageID:(NSString *) messageID
-          withCompletionHandler:(void (^)(NSDictionary * messageBody)) completionHandler;
->>>>>>> 7416a507a77f0e5e28e146e6c9b88828d0396717
 
 
 /// @name Deprecated methods
