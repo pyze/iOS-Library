@@ -466,7 +466,8 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 #pragma mark - Pyze Personalization Intelligence
 
 /**
- *  PyzePersonalizationIntelligence
+ *  PyzePersonalizationIntelligence  
+ *  See: http://pyze.com/iOS-Personalization.html and http://pyze.com/product/personalization-intelligence.html for more details.
  *
  *  This class provides access to get the personalization intelligence tags. These tags are set in the intelligence explorer.
  *
@@ -476,7 +477,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 @interface PyzePersonalizationIntelligence : NSObject
 
 /**
- *  Get tags returned from the personalized intelligence stored on the server.
+ *  Get all tags assigned to the user.  Note: Tags are case sensitive, "High Value" and "high value" are different tags.
  *
  *    [PyzePersonalizationIntelligence getTags:^(NSArray *tagsList) {
  *         NSLog(@"PyzePersonalizationIntelligence tags = %@", tagsList);
@@ -488,7 +489,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 
 /**
- *  Returns whether the tag is in the taglist persisted.
+ *  Returns true if requested tag is assigned to user.   Note: Tags are case sensitive, "High Value" and "high value" are different tags
  *
  *      NSLog(@"isTagSet = %d", [PyzePersonalizationIntelligence isTagSet:@"loyal"]);
  *
@@ -499,7 +500,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 +(BOOL) isTagSet:(NSString *) tag;
 
 /**
- * Returns whether the any of tag from tagList is in the taglist persisted.
+ *  Returns true if at least one tag is assigned.    Note: Tags are case sensitive, "High Value" and "high value" are different tags.
  *
  *      NSLog(@"areAnyTagsSet = %d",[PyzePersonalizationIntelligence areAnyTagsSet:@[@"High value"]]);
  *
@@ -511,7 +512,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 
 /**
- *  Returns whether the all of tag from tagList is in the taglist persisted.
+ *  Returns true if all tags specified are assigned to user.   Note: Tags are case sensitive, "High Value" and "high value" are different tags.
  *
  *     NSLog(@"areAllTagsSet = %d", [PyzePersonalizationIntelligence areAllTagsSet:@[@"loyal", @"whale",@"High value"]]);
  *
