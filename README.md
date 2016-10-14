@@ -12,9 +12,11 @@ Visit **<a href="https://iOS.pyze.com/">iOS Developer Center</a>** to learn more
 
 iOS versions supported are [7.x,] 8.x, 9.x, 10.x or higher through <a href="https://pyze.com/iOS-Install-Cocoapods.html">Cocoapods</a>. 
 
-If you cannot use Cocoapods, Install using the Framework <a href="https://pyze.com/iOS-Install-Framework.html">here</a>.
-
+If you cannot use Cocoapods, Install using the Framework <a href="https://pyze.com/iOS-Install-Framework.html">here</a>.  
 
 <a href="https://github.com/pyze/iOS-Library/wiki/iOS-Troubleshooting-Guide">iOS Troubleshooting Guide</a> is available here.
 
 <br>
+
+###The version of Pyze Framework on this page supports iOS 8.x, 9.x, 10.x or higher (recommended)
+###If your app targets iOS 7 and higher, see: https://github.com/pyze/iOS-Library-iOS7
