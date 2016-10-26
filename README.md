@@ -2,9 +2,9 @@
 iOS-Library for apps targeting iOS 8 as minimum deployment target (Recommended).  
 If your app targets iOS 7 and higher, see: https://github.com/pyze/iOS-Library-iOS7
 
-<a href="http://pyze.com" target="_Pyze"><img src="http://pyze.com/images/pyze-horizontal-color-RGB.svg" height="90" alt="Pyze"/></a>
+<a href="https://pyze.com" target="_Pyze"><img src="https://pyze.com/images/pyze-horizontal-color-RGB.svg" height="90" alt="Pyze"/></a>
 
-<img src="http://pyze.com/images/apple.svg" height="26" />
+<img src="https://pyze.com/images/apple.svg" height="26" />
 This is the [Pyze&reg;](https://pyze.com) iOS framework github page.  
 
 **Pyze is a Growth Intelligence&reg; platform for mobile app publishers**. 
