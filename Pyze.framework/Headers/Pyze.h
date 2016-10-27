@@ -246,7 +246,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
  *  @param userInfo User information received as a payload.
  *
- *  - Since: 2.8.2
+ *  - Since: 2.9.1
  */
 
 +(void) processReceivedRemoteNotificationWithId:(NSString *) identifer withUserInfo:(NSDictionary *) userInfo;
