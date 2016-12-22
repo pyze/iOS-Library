@@ -292,6 +292,18 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
                               navigationTextColor:(UIColor *) textColor
                             withCompletionHandler:(void (^)(PyzeInAppStatus *inAppStatus))completionhandler;
 
+
+#if TARGET_OS_TV
+/**
+ *  Dismisses the in-app notification UI.
+ *
+ *  @param animated     On YES, dismissed the In-app UI.
+ *
+ *  - Since: 3.0.0
+ */
++(void) dismissInAppNotificationUI:(BOOL) animated;
+#endif
+
 /// @name In-App Notifications (using API)
 
 /**
