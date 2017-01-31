@@ -2237,6 +2237,66 @@ typedef NS_ENUM(NSInteger, PyzeMessageType) {
 @end
 
 /**
+ *  ### PyzeSMS
+ *  Subclass of PyzeCustomEvent class used for supporting Short Message Service and Multimedia Messaging Service.
+ 
+ *  - Since: v3.1.0
+ 
+ */
+
+@interface PyzeSMS: PyzeCustomEvent
+
+/**
+ *  Send the device for registration with phone number.
+ *
+ *  @param phoneNumber Phone number as '1234567890'
+ *  @param countryCode Country code where the phone being used. For Example: e.g. “1” for US “91” for India
+ *  @param dictionary  Any additional attributes
+ 
+ *  - Since: v3.1.0
+ 
+ */
+
++(void) postRegisteredDevice:(NSString *) phoneNumber
+             withCountryCode:(NSString *) countryCode
+              withAttributes:(NSDictionary *) dictionary;
+
+/**
+ *  Post verification of the device.
+ *
+ *  @param phoneNumber Phone number as '1234567890'
+ *  @param verificationCode  Phone verification code received.
+ *  @param countryCode Country code where the phone being used. For Example: e.g. “1” for US “91” for India
+ *  @param dictionary  Any additional attributes
+ 
+ *  - Since: v3.1.0
+ 
+ */
+
++(void) postVerification:(NSString *) phoneNumber
+    withVerificationCode:(NSString *)verificationCode
+         withCountryCode:(NSString *) countryCode
+          withAttributes:(NSDictionary *) dictionary;
+
+/**
+ *  Send the device for unsubscribing with phone number.
+ *
+ *  @param phoneNumber Phone number as '1234567890'
+ *  @param countryCode Country code where the phone being used. For Example: e.g. “1” for US “91” for India
+ *  @param dictionary  Any additional attributes
+ 
+ *  - Since: v3.1.0
+ 
+ */
+
++(void) postUnsubscribeDevice:(NSString *) phoneNumber
+              withCountryCode:(NSString *) countryCode
+               withAttributes:(NSDictionary *) dictionary;
+
+@end
+
+
+/**
  *  ### PyzeTasks
  *  Subclass of PyzeCustomEvent class used post details of the events related to Tasks.
  
