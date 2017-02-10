@@ -285,6 +285,18 @@ NS_ASSUME_NONNULL_BEGIN
 +(void) setAppSpecificUserId:(nonnull NSString *) appSpecificUserId;
 
 /**
+ *  Reset App specific User Identifer.  Use this to identify users by an app specific trait. Examples include: username, userid, hashedid.  It is highly recommended you do not send PII.  Call postIfChanged after setting all identifiers.
+ *
+ *  @param appSpecificUserId An app specific user identifer
+ 
+ *  - Since: v3.2.1
+ 
+ *  @see postIfChanged
+ */
++(void) resetAppSpecificUserId:(nonnull NSString *) appSpecificUserId;
+
+
+/**
  *  Set user's Facebook Identifer. Call postIfChanged after setting all identifiers.
  *
  *  @param fbId facebook identifer
