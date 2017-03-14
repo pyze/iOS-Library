@@ -274,129 +274,52 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Set Identities Locally
 
 /**
- *  Set App specific User Identifer.  Use this to identify users by an app specific trait. Examples include: username, userid, hashedid.  It is highly recommended you do not send PII.  Call postIfChanged after setting all identifiers.
+ *  Set App specific User Identifer.  Use this to identify users by an app specific trait. Examples include: username, userid, hashedid.  It is highly recommended you do not send PII.
  *
- *  @param appSpecificUserId An app specific user identifer
+ *  @param uniqueID An app specific user identifer
  
  *  - Since: v1.0.0
  
- *  @see postIfChanged
  */
-+(void) setAppSpecificUserId:(nonnull NSString *) appSpecificUserId;
++(void) setUserIdentifer:(nonnull NSString *)uniqueID;
+
 
 /**
- *  Reset App specific User Identifer.  Use this to identify users by an app specific trait. Examples include: username, userid, hashedid.  It is highly recommended you do not send PII.  Call postIfChanged after setting all identifiers.
+ *  Resets App specific User Identifer.
  *
- *  @param appSpecificUserId An app specific user identifer
  
  *  - Since: v3.2.1
  
- *  @see postIfChanged
  */
-+(void) resetAppSpecificUserId:(nonnull NSString *) appSpecificUserId;
++(void) resetUserIdentifer;
 
 
 /**
- *  Set user's Facebook Identifer. Call postIfChanged after setting all identifiers.
- *
- *  @param fbId facebook identifer
+ *  Post the user details traits.
  
- *  - Since: v1.0.0
+ *  Here are some example traits you can use
  
- *  @see postIfChanged
- */
-+(void) setFbID:(nonnull NSString *) fbId;
-
-/**
- *  Set user's twitter Identifer. Call postIfChanged after setting all identifiers.
- *
- *  @param twitterId twitter identifer
+ "address" : "585 Broadway Street, Redwood City, CA 94063.   415-952-PYZE"
+ “age” : “17”
+ "avatar" : "http://www.example.com/user/avatar/12121"
+ “birthday” : “2000-01-01”
+ "createdAt" : “1999-02-22”
+ "description" : “”
+ "email" : "mary@abc.com
+ "firstName" : "Mary"
+ “gender”: “female”
+ "id" : usr1235
+ "lastName" : Joseph
+ "name" : Mary Joseph
+ "phone" : ""
+ "title" : "VP of Engineering"
+ "username" : "MJoseph"
+ "website" : "https://pyze.com/"
  
- *  - Since: v1.0.0
- 
- *  @see postIfChanged
- */
-+(void) setTwitterId: (nonnull NSString *) twitterId;
-
-/**
- *  Set user's email address if you use email to reachout to users. Call postIfChanged after setting all identifiers.
- *
- *  @param emailAddress Email address to reachout to users.
- 
- *  - Since: v1.0.0
- 
- *  @see postIfChanged
- */
-+(void) setEmail:(nonnull NSString *) emailAddress;
-
-/**
- *  Set user's phone number. Call postIfChanged after setting all identifiers.
- *
- *  @param phoneNumber Phone number to reachout.
- 
- *  - Since: v1.0.0
- 
- *  @see postIfChanged
- */
-+(void) setPhoneNumber:(nonnull NSString *) phoneNumber;
-
-/**
- *  Set user's push Notification Identifer. Call postIfChanged after setting all identifiers.
- *
- *  @param pushNotificationId Notification Identifer.
- 
- *  - Since: v1.0.0
- 
- *  @see postIfChanged
- */
-+(void) setPushNotificationRegistrationId:(nonnull NSString *) pushNotificationId;
-
-/**
- *  Set user's username. Call postIfChanged after setting all identifiers.
- *
- *  @param userName User name to track.
- 
- *  - Since: v1.0.0
- 
- *  @see postIfChanged
- */
-+(void) setUserName:(nonnull NSString *) userName;
-
-/**
- *  Set any custom information for user in key value pair format. Call postIfChanged after setting all identifiers.
- *
- *  @param value Custom value to add to identity object.
- *  @param key   Key for the custom value.
- 
- *  - Since: v1.0.0
- 
- *  @see postIfChanged
- */
-+(void) setCustomUserIdentifier:(nonnull NSString *) value forKey:(nonnull NSString *) key;
-
-#pragma mark - Retrieve Identities Set Locally
-
-/**
- *  Retrieving method for identities.
- *
- *  @return identities Set of key-value pairs of NSDictionary object containing Identities set or nil.
- 
- *  - Since: v1.0.0
+ *  - Since: v3.2.2
  
  */
-+(nullable NSDictionary *) identities;
-
-#pragma mark - Post Set Identities to Pyze
-
-/**
- *  Call this method after all the identifers are set.  This sends changed traits to Pyze Servers.
- 
- *  - Since: v1.0.0
- 
- *  @warning Call this to send traits to Pyze
- *  @see identities
- */
-+(void) postIfChanged; // call after the fields are set.
++ (void) postTraits:(NSDictionary *)dictionary;
 
 @end
 
