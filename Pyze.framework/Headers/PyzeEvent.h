@@ -300,30 +300,33 @@ NS_ASSUME_NONNULL_BEGIN
  *  Here are some example traits you can use
  *
  *  Send user traits as a map/dictionary.  For example
- *  -(void) postIdentityTraits {
- *      NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
- *      attributes[@"address"] = @"585 Broadway Street, Redwood City, California 94063";
- *      attributes[@"age"] = @"25";
- *      attributes[@"avatar"] =  @"https://about.me/muntek";
- *      attributes[@"birthday"] =  @"01-04-1986";
- *      attributes[@"createdAt"] = @"Date String";
- *      attributes[@"description"] = @"Web Hosting Specialist";
- *      attributes[@"email"] =  @"myEmail@gmail.com";
- *      attributes[@"firstName"] =  @"Muntek";
- *      attributes[@"gender"] = @"male";
- *      attributes[@"lastName"] =  @"Singh";
- *      attributes[@"name"] =  @"Muntek Singh";
- *      attributes[@"phoneNumber"] = @"415 555 1212";
- *      attributes[@"title"] = @"Web Hosting Specialist";
- *      attributes[@"username"] =  @"munteksingh";
- *      attributes[@"website"] =  @"https://pyze.com";
- *      attributes[@"facebookId"] = @"USER_facebookId";
- *      attributes[@"twitterUsername"] = @"USER_twitterId";
- *      attributes[@"snapchatUsername"] =  @"USER_snapchatId";
- *      attributes[@"linkedInProfileId"] =  @"USER_linkedinId";
- *      attributes[@"instagramUserId"] =  @"USER_instagramId";
- *      [PyzeIdentity postTraits:attributes];
- * }
+ *
+ *      -(void) postIdentityTraits 
+ *      {
+ *          NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+ *          attributes[@"address"] = @"585 Broadway Street, Redwood City, California 94063";
+ *          attributes[@"age"] = @"25";
+ *          attributes[@"avatar"] =  @"https://about.me/muntek";
+ *          attributes[@"birthday"] =  @"01-04-1986";
+ *          attributes[@"createdAt"] = @"Date String";
+ *          attributes[@"description"] = @"Web Hosting Specialist";
+ *          attributes[@"email"] =  @"myEmail@gmail.com";
+ *          attributes[@"firstName"] =  @"Muntek";
+ *          attributes[@"gender"] = @"male";
+ *          attributes[@"lastName"] =  @"Singh";
+ *          attributes[@"name"] =  @"Muntek Singh";
+ *          attributes[@"phoneNumber"] = @"415 555 1212";
+ *          attributes[@"title"] = @"Web Hosting Specialist";
+ *          attributes[@"username"] =  @"munteksingh";
+ *          attributes[@"website"] =  @"https://pyze.com";
+ *          attributes[@"facebookId"] = @"USER_facebookId";
+ *          attributes[@"twitterUsername"] = @"USER_twitterId";
+ *          attributes[@"snapchatUsername"] =  @"USER_snapchatId";
+ *          attributes[@"linkedInProfileId"] =  @"USER_linkedinId";
+ *          attributes[@"instagramUserId"] =  @"USER_instagramId";
+ *          
+ *          [PyzeIdentity postTraits:attributes];
+ *      }
  *  - Since: v3.2.2
  
  */
