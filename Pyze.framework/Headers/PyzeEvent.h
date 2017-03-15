@@ -274,7 +274,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Set Identities Locally
 
 /**
- *  Set App specific User Identifer.  Use this to identify users by an app specific trait. Examples include: username, userid, hashedid.  It is highly recommended you do not send PII.
+ *  Use this to identify users. Examples include: username, userid, email address, phone number, or a hashedId. Call this when a user logs in, registers or signs up.
  *
  *  @param uniqueID An app specific user identifer
  
@@ -285,7 +285,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- *  Resets App specific User Identifer.
+ *  Resets App specific User Identifer.  Call this when a user logs off.
  *
  
  *  - Since: v3.2.1
@@ -296,26 +296,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Post the user details traits.
- 
+ *
  *  Here are some example traits you can use
- 
- "address" : "585 Broadway Street, Redwood City, CA 94063.   415-952-PYZE"
- “age” : “17”
- "avatar" : "http://www.example.com/user/avatar/12121"
- “birthday” : “2000-01-01”
- "createdAt" : “1999-02-22”
- "description" : “”
- "email" : "mary@abc.com
- "firstName" : "Mary"
- “gender”: “female”
- "id" : usr1235
- "lastName" : Joseph
- "name" : Mary Joseph
- "phone" : ""
- "title" : "VP of Engineering"
- "username" : "MJoseph"
- "website" : "https://pyze.com/"
- 
+ *
+ *  Send user traits as a map/dictionary.  For example
+ *  -(void) postIdentityTraits {
+ *      NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+ *      attributes[@"address"] = @"585 Broadway Street, Redwood City, California 94063";
+ *      attributes[@"age"] = @"25";
+ *      attributes[@"avatar"] =  @"https://about.me/muntek";
+ *      attributes[@"birthday"] =  @"01-04-1986";
+ *      attributes[@"createdAt"] = @"Date String";
+ *      attributes[@"description"] = @"Web Hosting Specialist";
+ *      attributes[@"email"] =  @"myEmail@gmail.com";
+ *      attributes[@"firstName"] =  @"Muntek";
+ *      attributes[@"gender"] = @"male";
+ *      attributes[@"lastName"] =  @"Singh";
+ *      attributes[@"name"] =  @"Muntek Singh";
+ *      attributes[@"phoneNumber"] = @"415 555 1212";
+ *      attributes[@"title"] = @"Web Hosting Specialist";
+ *      attributes[@"username"] =  @"munteksingh";
+ *      attributes[@"website"] =  @"https://pyze.com";
+ *      attributes[@"facebookId"] = @"USER_facebookId";
+ *      attributes[@"twitterUsername"] = @"USER_twitterId";
+ *      attributes[@"snapchatUsername"] =  @"USER_snapchatId";
+ *      attributes[@"linkedInProfileId"] =  @"USER_linkedinId";
+ *      attributes[@"instagramUserId"] =  @"USER_instagramId";
+ *      [PyzeIdentity postTraits:attributes];
+ * }
  *  - Since: v3.2.2
  
  */
