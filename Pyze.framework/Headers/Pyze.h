@@ -623,3 +623,24 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 @end
 
+
+/**
+ *  PyzeAttribution
+ *  This class contains methods to post the attribution data to Pyze from attribution partners
+ */
+@interface PyzeAttribution : NSObject
+
+/**
+ *  Send Appsflyer attribution data to pyze.
+ *
+ *     -(void)onConversionDataReceived:(NSDictionary*) installData {
+ *          [PyzeAttribution postAppsFlyerAttribution:installData];
+ *      }
+ *
+ *  @param attributionData attribution/install data obtained from Appsflyer
+ *
+ *  - Since: 3.6.0
+ */
++ (void) postAppsFlyerAttribution:(NSDictionary *)attributionData;
+
+@end
