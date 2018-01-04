@@ -186,7 +186,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 *  - Since: 2.0.5
 *
 */
-+ (void) initializeWithLogLevel: (PyzeLogLevel) logLevel;
++ (void) initializeWithLogLevel:(PyzeLogLevel) logLevel;
 
 /**
  *  Initializes the Pyze library and specify the log throttling level. Call this method in the app delegate's method
@@ -245,6 +245,14 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  *
  */
 +(double) timerReference;
+
+
+/**
+ *  Returns the Pyze instance identifier. If Pyze not initialized, returns an empty string.
+ *
+ *  @return Pyze Instance identifier
+ */
++ (NSString *) getPyzeAppInstanceId;
 
 
 
