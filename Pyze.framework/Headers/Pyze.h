@@ -826,16 +826,30 @@ typedef NS_ENUM(NSInteger, PyzeNotificationActionType) {
 
 
 /**
+ *  THIS METHOD IS DEPRECATED. USE 'parsePushNotificationResponseWithUserinfo:completionHandler:'
+ *
  *  Use this API to parse the push notification response.
  *
  *  @param userInfo User information received as a payload
  *  @param completionHandler Completion handler, with 'PyzeNotificationContent' as parameter
  *
  */
-+ (void) parsePushNotificatoinResponseWithUserinfo:(NSDictionary *)userInfo completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler;
++ (void) parsePushNotificatoinResponseWithUserinfo:(NSDictionary *)userInfo completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler DEPRECATED_ATTRIBUTE;
+    
+
+/**
+ *  Use this API to parse the push notification response.
+ *
+ *  @param userInfo User information received as a payload
+ *  @param completionHandler Completion handler, with 'PyzeNotificationContent' as parameter
+ *
+ */
++ (void) parsePushNotificationResponseWithUserinfo:(NSDictionary *)userInfo completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler;
 
 
 /**
+ *  THIS METHOD IS DEPRECATED. USE 'parsePushNotificationResponseWithUserinfo:actionIdentifier:completionHandler:'
+ *
  *  Use this API to parse the push notification response.
  *  In addition to 'parsePushNotificatoinResponseWithUserinfo:completionHandler:', this method will provide 'PyzeNotificationContent.selectedAction' which is the user opted action and respective details.
  *
@@ -844,7 +858,19 @@ typedef NS_ENUM(NSInteger, PyzeNotificationActionType) {
  *  @param completionHandler Completion handler, with 'PyzeNotificationContent' as parameter
  *
  */
-+ (void) parsePushNotificatoinResponseWithUserinfo:(NSDictionary *)userInfo actionIdentifier:(NSString *)actionIdentifier completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler;
++ (void) parsePushNotificatoinResponseWithUserinfo:(NSDictionary *)userInfo actionIdentifier:(NSString *)actionIdentifier completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler DEPRECATED_ATTRIBUTE;
+    
+    
+/**
+ *  Use this API to parse the push notification response.
+ *  In addition to 'parsePushNotificationResponseWithUserinfo:completionHandler:', this method will provide 'PyzeNotificationContent.selectedAction' which is the user opted action and respective details.
+ *
+ *  @param userInfo User information received as a payload
+ *  @param actionIdentifier Identifier of user opted action.
+ *  @param completionHandler Completion handler, with 'PyzeNotificationContent' as parameter
+ *
+ */
++ (void) parsePushNotificationResponseWithUserinfo:(NSDictionary *)userInfo actionIdentifier:(NSString *)actionIdentifier completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler;
 
 
 @end
