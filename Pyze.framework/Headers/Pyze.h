@@ -271,6 +271,17 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 
 /**
+ *  Use this API to set the push notification device token. This will trigger Pyze to update the device token, which internally would be used to send the push notification. Call this API in Application's AppDelegate method application:didRegisterForRemoteNotificationsWithDeviceToken:.
+ *  The method accepts the token as NSStirng.
+ *
+ *  @param deviceToken device Token bytes received from the AppDelegate's method call.
+ 
+ *  - Since: 5.0.1
+ */
++(void) setRemoteNotificationDeviceTokenString:(NSString *) deviceToken;
+
+
+/**
  *  Use this API to process the push/remote notification. Call this everytime when you receive the remote notification from application:didReceiveRemoteNotification or application:didReceiveRemoteNotification:fetchCompletionHandler:. 
     
      If you are using interactive push notifications e.g. Button handlers in push messages, then use processReceivedRemoteNotificationWithId:
