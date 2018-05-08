@@ -451,6 +451,20 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  */
 + (Pyze*) sharedPyze;
 
+/**
+ *  Will stop collecting all data
+ *
+ *  @param shouldOptout Boolean value to decide if data tracking should be stopped.
+ */
++ (void) setUserOptOut:(BOOL)shouldOptout;
+
+/**
+ *  Will stop collecting all data and delete existing data from the server
+ *
+ *  @param shouldDelete Boolean value to decide if data collection should be stopped and delete existing data from the server
+ */
++ (void) deleteUser:(BOOL)shouldDelete;
+
 
 /**
  *  init method is unavailable. Use initializeWithKey: method instead.
