@@ -224,7 +224,25 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  */
 +(void) logThrottling:(PyzeLogLevel) logLevel;
 
+/// @name  Opt out data collection
 
+/**
+ *  Will stop collecting all data
+ *
+ *  @param shouldOptout Boolean value to decide if data tracking should be stopped.
+ *
+ - Since: 5.0.2
+ */
++ (void) setUserOptOut:(BOOL)shouldOptout;
+
+/**
+ *  Will stop collecting all data and delete existing data from the server
+ *
+ *  @param shouldDelete Boolean value to decide if data collection should be stopped and delete existing data from the server
+ *
+ - Since: 5.0.2
+ */
++ (void) deleteUser:(BOOL)shouldDelete;
 
 /// @name  Create Timer Reference to use in Timed Custom Events using PyzeCustomEvent class
 
@@ -304,6 +322,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 +(void) processReceivedRemoteNotificationWithId:(NSString *) identifer withUserInfo:(NSDictionary *) userInfo;
 
+
 /// @name In-App Notifications (using Built-in User Interface)
 
 /**
@@ -315,6 +334,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  
  */
 +(void) addBadge:(UIControl *) control;
+
 
 
 /**
@@ -451,19 +471,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  */
 + (Pyze*) sharedPyze;
 
-/**
- *  Will stop collecting all data
- *
- *  @param shouldOptout Boolean value to decide if data tracking should be stopped.
- */
-+ (void) setUserOptOut:(BOOL)shouldOptout;
 
-/**
- *  Will stop collecting all data and delete existing data from the server
- *
- *  @param shouldDelete Boolean value to decide if data collection should be stopped and delete existing data from the server
- */
-+ (void) deleteUser:(BOOL)shouldDelete;
 
 
 /**
