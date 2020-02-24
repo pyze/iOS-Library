@@ -281,7 +281,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  - Since: v3.2.3
  
  */
-+(void) setUserIdentifer:(nonnull NSString *)uniqueID;
++(void) setUserProfile:(nonnull NSString *)uniqueID
+pyzeProfileAttributes:(NSDictionary *)pyzeProfileAttributes
+customProfileAttributes:(NSDictionary *)customAttributes;
 
 
 /**
@@ -291,7 +293,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  - Since: v3.2.3
  
  */
-+(void) resetUserIdentifer;
++(void) resetUserProfile;
 
 
 /**
@@ -330,7 +332,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  */
 
-+ (void) postTraits:(NSDictionary *)dictionary;
++(void) updateUserProfileAttributes:(NSDictionary *)pyzeProfileAttributes
+            customProfileAttributes:(NSDictionary *)customAttributes;
 
 @end
 
