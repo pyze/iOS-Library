@@ -135,8 +135,6 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 #pragma mark - Pyze
 
-@protocol PyzeInAppMessageHandlerDelegate;
-@class PyzeInAppStatus;
 /**
  * Pyze main class
  *
@@ -337,101 +335,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
 
 
 
-/**
- *  Show in-app unread messages with default settings. For all the controls presented including  Message Navigation Bar, buttons
- *  will loaded with default presentation colors used by the SDK. When user taps on any of the buttons in in-app message
- *  completionhandler method will be called.
- *
- *      [Pyze countNewUnFetched:^(NSInteger result) {
- *          if (result > 0) {
- *              [Pyze showUnreadInAppNotificationUIWithCompletionHandler:^(PyzeInAppStatus *inAppStatus) {
- *                  NSLog(@"buttonIndex = %d", (int)inAppStatus.buttonIndex);
- *                  NSLog(@"message-ID =%@" , inAppStatus.messageID);
- *                  NSLog(@"campaign-ID = %@", inAppStatus.campaignID);
- *                  NSLog(@"title = %@",inAppStatus.title);
- *                  NSLog(@"urlString = %@",inAppStatus.urlString);
- *              }];
- *          }
- *      }];
- *
- *  @param completionhandler Completion handler
- *
- *  - Since: 2.5.3
- *
- */
-+(void) showUnreadInAppNotificationUIWithCompletionHandler:(void (^)(PyzeInAppStatus *inAppStatus))completionhandler;
 
-/**
- *  Convenience method to show in-app message with custom colors as required by the app. When user taps on any of the buttons in in-app message
- *  completionhandler method will be called. The call-to-action (upto 3) button colors are defined in the UI on growth.pyze.com when creating an in-app message. The navigation text color to move between in-app messages e.g. '<' | '>' are defined using navigationTextColor parameter in this method.
- *
- *  @param messageType             The in-app message type you would want to see. Default is PyzeInAppTypeUnread.
- *  @param textColor     Navigation text color (Ex: 1 of 10) and chevrons.
- *  @param completionhandler       Completion handler
- *
- *  - Since: 2.9.0
- 
- */
-
-+(void) showInAppNotificationUIForDisplayMessages:(PyzeInAppMessageType) messageType
-                              navigationTextColor:(UIColor *) textColor
-                            withCompletionHandler:(void (^)(PyzeInAppStatus *inAppStatus))completionhandler;
-
-/**
- *  Dismisses the in-app notification UI.
- *
- *  @param animated     On YES, dismissed the In-app UI.
- *
- *  - Since: 3.0.1
- */
-+(void) dismissInAppNotificationUI:(BOOL) animated;
-
-/// @name In-App Notifications (using API)
-
-/**
- *  Returns the messageHeaders and messageBody from the server and from the cache based on the messageType.
- *
- *  @param messageType       Message type for in-app messages.
- *  @param completionHandler Completion handler will be called with result.
- *
- *  - Since: 2.8.2
- */
-+(void) getMessagesForType:(PyzeInAppMessageType) messageType
-     withCompletionHandler:(void (^)(NSArray * result)) completionHandler;
-
-/**
- *  Returns the number of unread messages from the server.
- *
- *  @param completionHandler Completion handler will be called with count.
- *
- *  - Since: 2.3.0
- */
-+(void) countNewUnFetched:(void (^)(NSInteger count)) completionHandler;
-
-/**
- *  Get NSArray of message headers containing message ID and content ID.
- *
- *  @param messageType       Message type for in-app messages.
- *  @param completionHandler Completion handler will be called with result.
- *
- *  - Since: 2.3.0
- */
-+(void) getMessageHeadersForType:(PyzeInAppMessageType) messageType
-           withCompletionHandler:(void (^)(NSArray * messageHeaders)) completionHandler;
-
-
-/**
- *  Get message details with Campaign ID and message ID received from 'getMessageHeadersForType'.
- *
- *  @param cid                  campaign ID
- *  @param messageID            message ID
- *  @param completionHandler    Completion handler will be called with message body.
- *
- *  - Since: 2.3.0
- */
-+(void) getMessageBodyWithCampaignID:(NSString *) cid
-                        andMessageID:(NSString *) messageID
-               withCompletionHandler:(void (^)(NSDictionary * messageBody)) completionHandler;
 
 
 /**
@@ -483,144 +387,12 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  */
 -(instancetype) init NS_UNAVAILABLE;
 
-/**
- *  Show in-app unread messages with default settings. For all the controls presented including  Message Navigation Bar, buttons
- *  will loaded with default presentation colors used by the SDK. When user taps on any of the buttons in in-app message
- *  inAppMessageButtonHandlerWithIndex:buttonTitle:containingURLString:withDeepLinkStatus method will be called on your onViewController.
- *
- *  @param onViewController The controller on which the in-app should be presented.
- 
- *  @see showUnreadInAppNotificationUIWithCompletionHandler:
- 
- - Since: 2.3.0
- */
-+(void) showUnreadInAppNotificationUI:(UIViewController *) onViewController;
-
-
-/**
- *  Convenience method to show in-app message with custom colors as required by the app. When user taps on any of the buttons in in-app message
- *  inAppMessageButtonHandlerWithIndex:buttonTitle:containingURLString:withDeepLinkStatus method will be called on your onViewController.
- *
- *  @param onViewController        The controller on which the in-app should be presented.
- *  @param messageType             The in-app message type you would want to see. Default is PyzeInAppTypeUnread.
- *  @param buttonTextcolor         Button text color.
- *  @param buttonBackgroundColor   Button background color
- *  @param backgroundColor         Translucent background color of the 'MessageNavigationBar'
- *  @param messageCounterTextColor Message counter text color (Ex: 1 of 10 in-app messages).
- *
- *  @see showInAppNotificationUI: with completionHandler method.
- 
- *  - Since: 2.3.0
- */
-
-+(void) showInAppNotificationUI:(UIViewController *) onViewController
-             forDisplayMessages:(PyzeInAppMessageType) messageType
-      msgNavBarButtonsTextColor:(UIColor *) buttonTextcolor
-        msgNavBarButtonsBgColor:(UIColor *) buttonBackgroundColor
-               msgNavBarBgColor:(UIColor *) backgroundColor
-      msgNavBarCounterTextColor:(UIColor *) messageCounterTextColor;
-
-/**
- *  Convenience method to show in-app message with custom colors as required by the app. When user taps on any of the buttons in in-app message
- *  completionhandler method will be called.
- *
- *  @param messageType             The in-app message type you would want to see. Default is PyzeInAppTypeUnread.
- *  @param buttonTextcolor         Button text color.
- *  @param buttonBackgroundColor   Button background color
- *  @param backgroundColor         Translucent background color of the 'MessageNavigationBar'
- *  @param messageCounterTextColor Message counter text color (Ex: 1 of 10).
- *  @param completionhandler Completion handler
- *
- *  @see showInAppNotificationUIForDisplayMessages:navigationTextColor:withCompletionHandler: as alternative implementation.
- *
- *  - Since: 2.5.3
- 
- */
-+(void) showInAppNotificationUIForDisplayMessages:(PyzeInAppMessageType) messageType
-                        msgNavBarButtonsTextColor:(UIColor *) buttonTextcolor
-                          msgNavBarButtonsBgColor:(UIColor *) buttonBackgroundColor
-                                 msgNavBarBgColor:(UIColor *) backgroundColor
-                        msgNavBarCounterTextColor:(UIColor *) messageCounterTextColor
-                            withCompletionHandler:(void (^)(PyzeInAppStatus *inAppStatus))completionhandler;
++(void) showInAppNotification;
 
 @end
 
 
 
-/**
- *  Pyze In app message handler delegate. This has one optional call to action method which will inform your class
- when user clicks on one of the in-app messsage buttons.
- *
- *  - Since: 2.3.0
- */
-@protocol PyzeInAppMessageHandlerDelegate <NSObject>
-
-/// @name Optional delegate method
-
-@optional
-
-/**
- *  Call to action handler for in-app message buttons implemented by your view controller to receive in-app message
- button click actions.
- *
- *  @param buttonIndex  Button index
- *  @param title        Title provided for the button
- *  @param urlString    Deeplink url string provided.
- *  @param status       Pyze deep link status.
- *
- *  @see showUnreadInAppNotificationUI and showInAppNotificationUI methods.
- *
- *  - Since: 2.3.0
- *
- */
--(void) inAppMessageButtonHandlerWithIndex:(NSInteger) buttonIndex
-                               buttonTitle:(NSString *) title
-                       containingURLString:(NSString *) urlString
-                        withDeepLinkStatus:(PyzeDeepLinkStatus) status;
-
-@end
-
-
-/**
- *  PyzeInAppStatus
- *  This class contains return status when any of the button pressed in in-app message.
- */
-@interface PyzeInAppStatus : NSObject
-
-/**
- *  Button index, if provided or else be zero
- */
-@property (nonatomic, assign) NSInteger buttonIndex;
-
-/**
- *  Message-ID of the in-app message.
- */
-@property (nonatomic, strong) NSString *messageID;
-/**
- *  Campaign-IDof the in-app message.
- */
-@property (nonatomic, strong) NSString *campaignID;
-/**
- *  Title of the message. 'title' can be nil.
- */
-@property (nonatomic, strong) NSString *title;
-/**
- *  Url string of the message for deeplink purpose. This can be nil.
- */
-@property (nonatomic, strong) NSString *urlString;
-
-/**
- *  Status of the deeplink.
- */
-@property (nonatomic, assign) PyzeDeepLinkStatus status;
-
-/**
- *  Called only when Webhook request fails.
- */
-@property (nonatomic, strong) NSError *error;
-
-
-@end
 
 #pragma mark - Pyze Personalization Intelligence
 
