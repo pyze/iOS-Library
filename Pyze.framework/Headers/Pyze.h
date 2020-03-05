@@ -1,6 +1,6 @@
 //
 //  Pyze.h
-//  Pyze
+//  Pyze v5.3.3
 //
 //  Copyright © 2016 Pyze Technologies. All rights reserved.
 //
@@ -318,7 +318,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  *  - Since: 2.9.1
  */
 
-+(void) processReceivedRemoteNotificationWithId:(NSString *) identifer withUserInfo:(NSDictionary *) userInfo;
++(void) sendPushFeedback:(NSString *) identifer withUserInfo:(NSDictionary *) userInfo;
 
 
 /// @name In-App Notifications (using Built-in User Interface)
