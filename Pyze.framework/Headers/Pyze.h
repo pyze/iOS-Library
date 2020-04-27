@@ -1,6 +1,6 @@
 //
 //  Pyze.h
-//  Pyze v5.3.6
+//  Pyze v5.4.0
 //
 //  Copyright © 2016 Pyze Technologies. All rights reserved.
 //
@@ -333,7 +333,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  */
 +(void) addBadge:(UIControl *) control;
 
-
++(void) sendCampaignFeedbackWithMsgType:(NSString *) msgType messageId:(NSString *) mid campaignId:(NSString *) cid nodeId:(NSString *) nodeId action:(NSString *) action userAction:(NSDictionary *) userAction;
 
 
 

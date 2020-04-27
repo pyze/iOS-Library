@@ -4,8 +4,3 @@ framework module Pyze {
   export *
   module * { export * }
 }
-
-module Pyze.Swift {
-    header "Pyze-Swift.h"
-    requires objc
-}
