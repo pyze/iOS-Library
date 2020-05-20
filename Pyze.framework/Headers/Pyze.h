@@ -1,6 +1,6 @@
 //
 //  Pyze.h
-//  Pyze v5.4.0
+//  Pyze v5.4.1
 //
 //  Copyright © 2016 Pyze Technologies. All rights reserved.
 //
@@ -308,6 +308,7 @@ typedef NS_ENUM(NSInteger, PyzeDeepLinkStatus) {
  *  - Since: 2.2.1
  */
 +(void) processReceivedRemoteNotification:(NSDictionary *) userInfo;
++(void) processReceivedRemoteNotification:(NSDictionary *) userInfo withState: (UIApplicationState) state withCompletionHandler: (void (^)(UIBackgroundFetchResult)) handler;
 
 /**
  *  Use this API to process the local/remote push notifications. Call this everytime when you receive the remote notification from application:handleActionWithIdentifier:forRemoteNotification:completionHandler:. For example: Button handlers in
@@ -619,6 +620,7 @@ typedef NS_ENUM(NSInteger, PyzeNotificationActionType) {
  */
 + (NSSet *) getPyzeDefaultNotificationCategories;
 
++(void)initWithLaunchOptions:(NSDictionary *)launchOptions;
 
 /**
  *  This will perform the selected notification action as identified by 'actionIdentifier'
@@ -631,18 +633,6 @@ typedef NS_ENUM(NSInteger, PyzeNotificationActionType) {
 
 
 /**
- *  THIS METHOD IS DEPRECATED. USE 'parsePushNotificationResponseWithUserinfo:completionHandler:'
- *
- *  Use this API to parse the push notification response.
- *
- *  @param userInfo User information received as a payload
- *  @param completionHandler Completion handler, with 'PyzeNotificationContent' as parameter
- *
- */
-+ (void) parsePushNotificatoinResponseWithUserinfo:(NSDictionary *)userInfo completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler DEPRECATED_ATTRIBUTE;
-    
-
-/**
  *  Use this API to parse the push notification response.
  *
  *  @param userInfo User information received as a payload
@@ -652,20 +642,6 @@ typedef NS_ENUM(NSInteger, PyzeNotificationActionType) {
 + (void) parsePushNotificationResponseWithUserinfo:(NSDictionary *)userInfo completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler;
 
 
-/**
- *  THIS METHOD IS DEPRECATED. USE 'parsePushNotificationResponseWithUserinfo:actionIdentifier:completionHandler:'
- *
- *  Use this API to parse the push notification response.
- *  In addition to 'parsePushNotificatoinResponseWithUserinfo:completionHandler:', this method will provide 'PyzeNotificationContent.selectedAction' which is the user opted action and respective details.
- *
- *  @param userInfo User information received as a payload
- *  @param actionIdentifier Identifier of user opted action.
- *  @param completionHandler Completion handler, with 'PyzeNotificationContent' as parameter
- *
- */
-+ (void) parsePushNotificatoinResponseWithUserinfo:(NSDictionary *)userInfo actionIdentifier:(NSString *)actionIdentifier completionHandler:(void (^)(PyzeNotificationContent *pyzePushObject))completionHandler DEPRECATED_ATTRIBUTE;
-    
-    
 /**
  *  Use this API to parse the push notification response.
  *  In addition to 'parsePushNotificationResponseWithUserinfo:completionHandler:', this method will provide 'PyzeNotificationContent.selectedAction' which is the user opted action and respective details.
