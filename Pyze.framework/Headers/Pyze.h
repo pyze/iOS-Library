@@ -1,6 +1,6 @@
 //
 //  Pyze.h
-//  Pyze v5.4.2
+//  Pyze v5.4.3
 //
 //  Copyright © 2016 Pyze Technologies. All rights reserved.
 //
