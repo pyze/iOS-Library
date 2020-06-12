@@ -89,6 +89,13 @@
  */
 +(void) postTimedWithEventName:(nonnull NSString *) eventName withTimerReference:(double) timerReference;
 
+
++(void) startTimerForEvent: (nonnull NSString *)eventName;
+
++(void) postTimedEvent: (nonnull NSString *)eventName;
+
++(void) postTimedEvent: (nonnull NSString *)eventName withAttributes:(nullable NSDictionary *)attributes;
+
 @end
 
 
